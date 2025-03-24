@@ -1,0 +1,45 @@
+Unit Information:
+
+Machine learning is at the forefront of development in computer science, presenting us with unprecedented opportunities to harness the power of artificial intelligence. From medical research to security, to language translation and self-driving cars, its applications in daily life are rapidly increasing.
+
+This unit introduces you to some of the main algorithms used in machine learning.
+
+Using key results from basic probability as a foundation, topics include inferring variables from data, clustering data, mixture models for clustering data, Monte Carlo methods for modelling probability distributions, Bayesian neural networks for classification, and Hopfield neural networks for modelling associative memories.
+
+Emphasising strategies to derive algorithms with nice properties that can be proved, you will learn how to implement these algorithms for simple data sets.
+
+Assignments addressing theory and programming components are designed to help you to fine tune skills that are in demand.
+
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+demonstrate programming skills in a high-level programming language;
+
+demonstrate knowledge in algorithms related to machine learning;
+
+critically assess and appraise the approaches presented in this unit; and
+
+demonstrate problem-solving and algorithm-development skills.
+
+
+
+
+
+Assessment information
+Assessments are subject to change up to 8 weeks prior to the start of the teaching period in which you are undertaking the unit.
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assessment 1	Yes	15%	All offerings	
+Math/theory/programming tasks. All assessment tasks must be attempted.
+
+Assessment 2	Yes	15%	All offerings	
+Math/theory/programming tasks. All assessment tasks must be attempted.
+
+Assessment 3	Yes	15%	All offerings	
+Math/theory/programming tasks. All assessment tasks must be attempted.
+
+Final Examination	Yes	55%	All offerings	
+It is mandatory to pass this component in order to pass the unit.

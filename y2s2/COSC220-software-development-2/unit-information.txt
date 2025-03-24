@@ -1,0 +1,89 @@
+Unit Information:
+
+Modern software development is highly collaborative. Teams of developers work together to take software from conception into production and continue to develop the software based on feedback from its use. This introduces a number of engineering challenges, as teams must ensure that the program works and is well designed, even while it is being modified by many people at once.
+
+Many of the software engineering practices and tool chains that are core to a developer&#39;s work are designed to support the collaborative nature of programming.
+
+In this unit you will work in teams to develop different features of a class-wide development project, to learn how software engineers design, build, deploy, and modify large programs together.
+
+Introducing you to key concepts, including distributed version control, continuous integration, deployment, and delivery practices, as well as agile development and software design, the unit will help you to hone invaluable applied skills.
+
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+work with other programmers and other teams of programmers on large software projects;
+
+apply collaborative software development practices and tool chains;
+
+design and develop features for a software system, from conception through to testing, deployment, and continuous improvement;
+
+design, model, and investigate user interaction and user experience with software;
+
+apply techniques for verifying the quality of software during development and explain the ethical considerations around software failure risks and their impact; and
+
+investigate, analyse, understand, and modify the design of program code, including code written by others.
+
+
+
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assessment 1	Yes	15%	All offerings	
+Online quiz and Exercises. 
+
+Assessment 2	Yes	10%	All offerings	
+Software development task.
+
+Assessment 3	Yes	45%	All offerings	
+Collaborative software development project.
+
+Assessment 4	Yes	5%	All offerings	
+Studio critique.
+
+Final Examination	Yes	25%	All offerings	
+Unsupervised take home examination.
+
+No. of words:  2000
+
+
+
+
+
+LIST OF TEXTBOOK IS HUGE
+
+UML Distilled: A Brief Guide to the Standard Object Modeling
+ISBN: 9780321193681
+
+Fowler, M., Addison-Wesley 3rd ed. 2003
+
+Text refers to: All offerings
+
+Refactoring: Improving the Design of Existing Code
+ISBN: 9780134757599
+
+Fowler, M., Pearson Higher Ed 2nd ed. 2018
+
+Text refers to: All offerings
+
+Extreme Programming Explained: Embrace Change
+ISBN: 9780321278654
+
+Beck, K., Addison-Wesley Professional 2nd ed. 2004
+
+Text refers to: All offerings
+
+Design Patterns: Elements of Reusable Object-Oriented Software
+ISBN: 9780201633610
+
+Gamma, E., Helm, R., Johnson, R. and Vlissides, J., Addison-Wesley Professional 1994
+
+Text refers to: All offerings
+
+Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation
+ISBN: 9780321601919
+
+Humble, J. and Farley, D., Addison-Wesley 2010
+
+Text refers to: Trimester 2 (On Campus), Trimester 2 (Online)

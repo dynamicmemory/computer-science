@@ -1,0 +1,45 @@
+Unit Overview:
+
+Computer networking is a key component of modern information systems. Secure and efficient implementation of distributed applications on server, mobile and desktop systems is vital to ensure effective use of available resources.
+
+Introducing you to the foundations of computer networks and network security, you will explore the protocols, techniques and standards used globally within networked systems.
+
+Covering the technological breadth of the ‘Open System Interconnection’ (OSI) model, topics include principles of reliable data transfer, routing algorithms, common networking protocols, security and network programming.
+
+The unit provides a solid understanding of concepts for secure access and transfer of information across insecure channels, including symmetric encryption, public key cryptography and its modes of operation.
+
+You will also develop distributed applications, implementing existing application layer protocols and building new protocols to hone skills for solving complex problems.
+
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+describe the functions of computer systems and devices in computer networks, and understand the security threats relevant to the transfer of information across communication systems;
+
+describe, analyse and compare a range of transport, network, data-link and physical layer protocols/algorithms in terms of their features, purpose and performance;
+
+develop distributed applications that implement both established protocols (based upon existing documented standards) and derived protocols developed for specific purposes;
+
+analyse and interpret mechanisms used for secure communication and develop distributed applications that allow for the secure transfer of information; and
+
+describe and analyse the various administrative and social aspects of specific communication technologies, security threats, wireless/mobile computing platforms.
+
+
+
+Assessment information
+Assessments are subject to change up to 8 weeks prior to the start of the teaching period in which you are undertaking the unit.
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assessment 1	Yes	10%	All offerings	
+5 quizzes at 2%
+
+Assessment 2	Yes	25%	All offerings	
+Programming assignment. All assessment tasks must be attempted.
+
+Assessment 3	Yes	25%	All offerings	
+Programming assignment. All assessment tasks must be attempted.
+
+Final Examination	Yes	40%	All offerings	
+It is mandatory to pass this component in order to pass the unit.

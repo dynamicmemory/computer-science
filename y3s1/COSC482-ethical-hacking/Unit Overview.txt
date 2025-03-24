@@ -1,0 +1,33 @@
+Unit Overview:
+
+In this hands-on unit, you will gain experience in ethical hacking and penetration testing to expose vulnerabilities in a system.
+
+You will be introduced to both network attack strategies, such as denial of service attacks, and application-level attacks, such as injection.
+
+Using this knowledge, you will learn how to develop crucial countermeasures to mitigate cybersecurity risks and ensure your future as a vital cybersecurity specialist.
+
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+demonstrate advanced knowledge and understanding of ethical hacking principles;
+
+develop attack vectors to exploit discovered vulnerabilities and design countermeasures;
+
+conduct penetration testing and demonstrate advanced knowledge and understanding of penetration testing methodologies; and
+
+demonstrate advanced knowledge and understanding of cybersecurity countermeasures, and the ability to design and deploy them to mitigate the discovered risks.
+
+
+Assessment information
+Assessments are subject to change up to 8 weeks prior to the start of the teaching period in which you are undertaking the unit.
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assignment	Yes	30%	All offerings	 
+Final Examination	Yes	40%	All offerings	
+ It is mandatory to pass this component in order to pass the unit.
+
+ 	Yes	30%	All offerings	
+Assignment

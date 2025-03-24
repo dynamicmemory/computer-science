@@ -1,0 +1,39 @@
+Unit Information:
+
+Deep learning is one of the most important techniques in Artificial Intelligence, underpinning rapidly advancing innovative technologies such as autonomous systems, biometrics, cybersecurity and digital assistance. This unit introduces you to deep learning using a range of toolkits and technologies commonly applied within industry and research settings. You will gain invaluable hands-on experience building deep learning workflows to solve computer vision and natural language processing problems using advanced techniques. Topics covered include computer vision, natural language processing and generative AI, using Deep Convolutional Neural Networks (DCNNs), Transformers, Recurrent Neural Networks (RNNs), Generative Adversarial Networks (GANs) and Generative Pre-trained Transformers (GPT). You will understand the theoretical concepts underpinning deep learning best practices, with a strong focus on applied skills. The unit culminates in self-directed deep learning project applying knowledge and skills learned.
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+understand the fundamentals of deep learning including tensors and their operations, gradient descent and backpropagation;
+
+solve problems using a range of deep learning toolkits and technologies commonly applied within industry and research settings;
+
+apply principles of deep learning using deep convolutional neural networks for computer vision;
+
+apply principles of deep learning using transformers for natural language processing:
+
+design and implement an effective deep learning workflows to solve problems using advanced deep learning techniques, applying best practices; and
+
+demonstrate effective oral communication skills to justify decisions and approach to solving a deep learning problem.
+
+
+
+Assessment information
+Assessments are subject to change up to 8 weeks prior to the start of the teaching period in which you are undertaking the unit.
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assignment 1: Deep Convolutional Neural Networks for Computer Vision	Yes	20%	All offerings	
+Students build a computer vision workflow demonstrating understanding of DCNNs. Students record a short video demonstrating their workflow.
+
+Assignment 2: Transformers for Natural Language Processing	Yes	20%	All offerings	
+Students build a natural language processing workflow demonstrating understanding of transformers. Students record a short video demonstrating their workflow.
+
+Individual Student Project	Yes	30%	All offerings	
+Students design a custom workflow to solve a computer vision AND/OR natural language processing problem of their choosing. Students record a short video demonstrating their workflow, explaining how they solved the problem and justifying their implementation choices.
+
+Open Book Exam	Yes	30%	All offerings	
+Open Book Moodle quiz.
+
+It is mandatory to pass this component in order to pass the unit.

@@ -1,0 +1,28 @@
+*.mp4
+*.mkv
+textbooks/
+
+.ipynb_checkpoints
+.metals/
+.bsp/
+.scala-build/
+.DS_Store/
+
+# Remove these once i fix the repo
+06-data science/Topic 35 - K-Means Clustering/Reviews.csv
+06-data science/Topic 32 - AdaBoost Classifiers/creditcard.csv
+06-data science/Topic*
+
+# Remove these as i sort out the old subjects ive done.
+01-p*
+02-f*
+03-m*
+04-c*
+05-d*
+06-d*
+07-o*
+08-s*
+16-s*
+19-p*
+25-s*
+26*d

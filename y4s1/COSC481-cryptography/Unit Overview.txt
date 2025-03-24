@@ -1,0 +1,38 @@
+Unit Overview:
+
+Cryptography is the study of secret writing that allows for messages to be converted to cyphertexts intelligible only to the intended recipients in possession of cryptographic keys. Cryptographic techniques are vital in modern cybersecurity to ensure confidentiality, integrity, authenticity and non-repudiation, and to protect data in storage and transit.
+
+In this unit you will gain an understanding of the principles and practice of cryptography, starting with number and information theoretic concepts, and classical ciphers. You will learn about contemporary symmetric and public-key cryptosystems for encryption, authentication and digital signatures, as well as techniques for key management.
+
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+demonstrate knowledge and understanding of number and information theories and apply them to analyse ciphers;
+
+understand the principles behind classical ciphers and use software tools to break them;
+
+demonstrate in-depth knowledge and advanced understanding of modern cryptosystems, and be able to analyse and evaluate them; and
+
+design and/or implement a cryptosystem and conduct experiments to empirically compare it to a state-of-the-art system.
+
+
+
+Assessment information
+Assessments are subject to change up to 8 weeks prior to the start of the teaching period in which you are undertaking the unit.
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assignment	Yes	20%	All offerings	
+Assignment
+
+Assignment	Yes	15%	All offerings	
+Group Assignment
+
+Quiz	Yes	15%	All offerings	
+Multiple choice and/or short answers and/or long answers.
+
+Weekly quizzes	Yes	10%	All offerings	 
+Final Examination	Yes	40%	All offerings	
+It is mandatory to pass this component in order to pass the unit.

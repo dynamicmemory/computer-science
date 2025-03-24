@@ -1,0 +1,55 @@
+Question 1
+
+a) show that for real x: 2x^2 + 100x + 10 is O(x^2)
+
+We need to fix c1, c2 and n0 where f(x) = 2x^2 + 100x + 10 is:
+c1*g(x) <= f(x) <= c2*g(x) for all n where n > n0
+
+since we have 2x^2 + 100x + 10, when x gets large, 2x^2 dominates the equation
+so finding an upper bound we can take the leading term and see that 2x^2 < 3x^2
+therefore c2*g(x) = 3x^2
+
+now for the lower bound we do a similar thing, we are looking for g(x) < 2x^2 + 100x + 10, 
+since 2x^2 < f(x) we can take c1*g(x) = 2x^2 therefore we have 
+
+2x^2 <= f(x) <= 3x^2 for all x > 100 
+
+b) 
+Going from 1 data popint to 2 data points is different then going from 5000 data points 
+to 10000 data points because:
+
+from 1 to 2 data points the execution time is quadrupling from the leading term being
+1x^2 = 1 to 2x^2 = 4, now compare this to 
+5000x^2 = 25000000 to 10000x^2 = 50000000 which is a doubling of time. 
+Yes the time between 5000 to 10000 will be longer, but in relative terms the 
+time jump from 1 to 2 is actually longer.
+
+A NOTE ON MY EXPLAINATION..... ITS HALF WRONG, I FORGOT ABOUT THE 2 IN THE LEADING TERM 
+jippity did some math for me on it.
+
+
+Question 2 
+
+a) O(n)
+b) O(n^3)
+c) O(n^2)
+
+Question 3
+
+Since the key is always either the first or last element in the array we can say 
+
+P[e] = 1/2 * 1 + 1/2 * n
+     = 1/2 + n/2
+     = n + 1 / 2 
+
+Drop all the constants and we get O(n) 
+
+If we were to modify the algo so that it only searched the first element and then 
+the last element we would get O(1) and it would be constant time, this is because 
+it would always only do 2 checks at most 
+
+P[e] = 1/2 * 1 + 1/2 * 1 
+     = 1/2 + 1/2 
+     = 1 
+
+

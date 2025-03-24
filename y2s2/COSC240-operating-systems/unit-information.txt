@@ -1,0 +1,49 @@
+Unit Information:
+
+An operating system is a fundamental component of most modern computing environments. Operating systems have developed in parallel with computer hardware, advancing to ensure the hardware can be used as effectively as possible. Build the knowledge and skills needed to ensure that you can stay at the forefront of innovation in this rapidly evolving field.
+
+Studying this unit, you will be introduced to the core components and theoretical underpinnings of operating systems, including processes, memory management, file systems and scheduling, brought to life with real-world case studies.
+
+With this as a foundation, your understanding of these key concepts will be extended as you explore multiprocessor and distributed systems.
+
+The unit offers insights into concurrency control and topical issues in security. You will also have opportunities to fine tune your ability to plan and implement solutions for challenging programming problems.
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+articulate knowledge of the fundamental principles of computer architecture using appropriate terminology;
+
+describe the historical development of operating systems and its impact on availability of technology;
+
+broadly explain theoretical and technical concepts relating to operating systems, including processes, virtual memory, files, security and distributed computing;
+
+analyse and evaluate a range of algorithms for process scheduling, concurrency, memory management and file storage; and
+
+plan and implement solutions to sometimes complex programming problems involving C programs and UNIX system calls.
+
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assessment 1	Yes	10%	All offerings	
+Theory assignment.  Short answers.
+
+No. Words: approx 300
+
+Assessment 2	Yes	15%	All offerings	
+Programming assignment.
+
+Assessment 3	Yes	10%	All offerings	
+Theory assignment.  Short answers.
+
+No. Words: approx 300
+
+Assessment 4	Yes	15%	All offerings	
+Programming assignment.
+
+Assessment 5	Yes	10%	All offerings	
+5 quizzes at 2% each.
+
+No of words:  approx 800
+
+Final Examination	Yes	40%	All offerings	
+It is mandatory to pass this component in order to pass this unit.

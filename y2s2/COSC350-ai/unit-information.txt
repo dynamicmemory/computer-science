@@ -1,0 +1,41 @@
+Unit Information:
+
+Artificial intelligence (AI) is a rapidly evolving branch of Computer Science that deals with intelligent behaviour, learning and adaptation in machines. From the fields of speech recognition, to machine translation and robotics, AI has contributed to state-of-the art technology and is a key focus for future research and development.
+
+This unit introduces you to a range of foundational areas in AI. The unit will help you to develop AI problem solving skills with broad applications to computational problems.
+
+Topics include intelligent agents, classical and heuristic search strategies, evolutionary algorithms, probability and Bayesian inference, and basic machine learning concepts.
+
+With a series of engaging practicals and programming assignments you will be ready to demonstrate technical capabilities that can help you to stand out in your career.
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+explain the history and foundations of artificial intelligence;
+
+analyse problem specifications and derive appropriate solutions for them;
+
+map solutions to selected artificial intelligence algorithms; and
+
+design and implement solutions in a high-level programming language.
+
+
+
+
+Assessment information
+Assessments are subject to change up to 8 weeks prior to the start of the teaching period in which you are undertaking the unit.
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assessment 1	Yes	15%	All offerings	
+Practical problem solving assignment. All assessment tasks must be attempted.
+
+Assessment 2	Yes	15%	All offerings	
+Practical problem solving assignment. All assessment tasks must be attempted.
+
+Assessment 3	Yes	20%	All offerings	
+Implement the solution to a computational problem in a high-level programming language, preferably R. All assessment tasks must be attempted.
+
+Final examination	Yes	50%	All offerings	
+It is mandatory to pass this component in order to pass the unit.

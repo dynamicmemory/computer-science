@@ -1,0 +1,47 @@
+Unit Information:
+
+The internet has changed the way people interact with, and think about, computers. From online news to social networking sites, the diversity of ways that we utilise the internet is extensive; yet how many people understand how this technology works and how to create a web page?
+
+This unit introduces you to the fundamentals and modern concepts of web development, equipping you with skills that are increasingly valuable as the internet becomes further embedded in our lives.
+
+You will learn how web servers and clients communicate using Hypertext Transfer Protocol (HTTP). You will also explore the formal languages used for web site development: HyperText Markup Language (HTML) used to generate the structure of web pages, Cascading Style Sheets (CSS) to apply stylistic features that enhance web page presentation, and Javascript and jQuery to provide dynamic user interactions.
+
+Techniques such as server-side scripting (PHP) with session management are also discussed.
+
+
+
+Learning outcomes
+Upon completion of this unit, students will be able to:
+
+describe how web servers and clients communicate via the use of the HTTP;
+
+design and develop web sites to disseminate information using formal languages HTML, CSS and Javascript;
+
+apply stylistic features to enhance the presentation of information on web pages;
+
+enhance the dynamism of user interaction with web pages using Javascript to control event handling;
+
+develop dynamic web applications that interact with the Internet's infrastructure; and
+
+demonstrate knowledge and understanding of the issues of intellectual property, privacy, the history of the web and current issues related to web development.
+
+
+Title	Must Complete	Weight	Offerings	Assessment Notes
+Assessment 1	Yes	10%	All offerings	
+5 Online quizzes All assessment tasks must be attempted.
+
+No. Words: 1500
+
+Assessment 2	Yes	10%	All offerings	
+Programming task.All assessment tasks must be attempted.
+
+Assessment 3	Yes	15%	All offerings	
+Programming task. All assessment tasks must be attempted.
+
+Assessment 4	Yes	15%	All offerings	
+Web development project.All assessment tasks must be attempted.
+
+No. Words: 300
+
+Moodle Exam	Yes	50%	All offerings	
+It is mandatory to pass this component in order to pass the unit.
