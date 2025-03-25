@@ -1,12 +1,15 @@
 package cosc250.firststeps
 
-
+@main def main(): Unit = 
+  // println(rotate(3, List(1,2,3,4,5,6))) 
+  println(pack(List(1,1,1,2,2,3,4,4)))
 /** 
  * Rotate a list N places to the left. For instance 
  * rotate(3, List(1, 2, 3, 4, 5, 6)) would be List(4, 5, 6, 1, 2, 3)
  */
 def rotate[T](by:Int, list:List[T]):List[T] = 
-  ???
+  val mod = by % list.length
+  list.drop(mod) ++ list.take(mod)
 
 /**
  * Pack consecutive duplicates in a list into sublists
@@ -16,9 +19,8 @@ def rotate[T](by:Int, list:List[T]):List[T] =
  * 
  */
 def pack[T](list:List[T]):List[List[T]] = 
-  ???
+  val lists = list.map(x => List(x))
   
-
 /**
  * Sort a list of lists according to the length of the sublist
  * 
@@ -26,7 +28,7 @@ def pack[T](list:List[T]):List[List[T]] =
  * would be List(List(4), List(2, 2), List(1, 1, 1))
  */
 def sortByLength[T](outer:List[List[T]]):List[List[T]] = ???
-
+  
 /**
  * FoldLeft on a tree
  * 

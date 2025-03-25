@@ -142,3 +142,21 @@ SELECT DISTINCT fname, lname FROM employee, works_on, project
           e.fname = 'John' AND 
           e.lname = 'Smith');
 
+-- c) List the project names of all projects that have least one employee working
+--    on them who are supervises by "John James". 
+
+SELECT pname FROM project WHERE dnum = 
+(SELECT dno FROM employee WHERE super_ssn =
+(SELECT ssn FROM employee WHERE (fname, lname) = ('John', 'James')));
+
+-- d) List names of employees that only work on the "ProductX" project. 
+
+SELECT fname, lname FROM employee, works_on, project WHERE employee_ssn = ssn 
+    AND project_number = pnumber AND pname = 'ProductX' AND ssn NOT IN 
+    (SELECT employee_ssn FROM works_on, project WHERE project_number = pnumber
+    AND pname != 'ProductX');
+
+
+-- QUESTION 2
+
+-- a)  

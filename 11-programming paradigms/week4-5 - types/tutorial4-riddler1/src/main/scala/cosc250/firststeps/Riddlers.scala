@@ -1,6 +1,7 @@
 package cosc250.firststeps
 
 import scala.annotation.tailrec
+import java.text.RuleBasedCollator
 
 
 
@@ -39,18 +40,27 @@ def extraPerfectSquares(max:Int):Seq[Int] =
   * Write code to find the largest whole number that is less than its value in letters.
   * 
   */
+
+
 def valueOf(word:String):Int = 
   
-  word.map(ch => ('a' to 'z').zipWithIndex.toMap.getOrElse(ch, 0) + 1).sum
+  word.toLowerCase().filter(_.isLetter).map(ch => ch - 'a' + 1).sum
+  // word.map(ch => ('a' to 'z').zipWithIndex.toMap.getOrElse(ch, 0) + 1).sum
 
+// I can only think to create a giant match statement that can map out each number
+// from the tens, houdreds, thousands from a number to a string, if there is a 
+// better way I wish i knew. Leaving it hahncoded to one for now
+def numberToWord(num: Int): String = 
+  "one"
 
-def notWorthItsWeightInLetters:Int = 
-  ???
+def notWorthItsWeightInLetters:Int =  ???
+  // (1 to 1000000000).filter(n => n < valueOf(numberToWord(n))) 
 
 @main def wiwilMain = 
 
-  println(valueOf("one"))
+  println("Largest number to letter word.. probelm, thing: " )
 
+    
   /**
    * Another Riddler! 
    * 
