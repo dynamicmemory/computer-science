@@ -56,4 +56,7 @@ def factorial(n: Int): BigInt = {
 
   println(sqrtDivide(-1, 0))
 
+
+  // Safe quadratic
+  
 }
