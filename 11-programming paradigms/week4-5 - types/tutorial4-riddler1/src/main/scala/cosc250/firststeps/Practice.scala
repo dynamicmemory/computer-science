@@ -20,7 +20,7 @@ def rotate[T](by:Int, list:List[T]):List[T] =
  */
 def pack[T](list:List[T]):List[List[T]] = 
   val lists = list.map(x => List(x))
-  
+  lists 
 /**
  * Sort a list of lists according to the length of the sublist
  * 
