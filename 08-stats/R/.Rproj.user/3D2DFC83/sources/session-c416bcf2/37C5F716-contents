@@ -1,0 +1,88 @@
+# Chapter 6 - Inference for categorical Data
+
+# Success- failure condition (again)
+
+n = 826
+pbar = 0.7
+
+n*pbar > 10
+n*(1-pbar) > 10
+
+# With both conditions being true we can continue using the 
+# normal distribution to model pbar since we don't know the 
+# true value of p
+
+# Find the se of pbar
+
+se = (pbar * (1 - pbar) / n)**0.5
+
+# Constuct a 95% conf interval
+
+# qnorm will find zstar when we are working with normal distro
+zstar = qnorm(0.975) 
+# we want 95% conf int, so we get 0.975 i.e 0.025 each side
+
+pbar_upper = pbar + zstar * se
+pbar_lower = pbar + zstar * se
+
+# Confindence interval for a single proportion
+
+# 1 - Prepare, identify pbar and n
+# 2 - Check, Verify conditions for pbar being nearly normal, 
+#     for one proportion conf int use pbar over p to check 
+#     success-failure conditions
+# 3 - Calculate, If conds hold, compute se using pbar and find
+#     zstar using qnorm() and conf int percentage, remember for
+#     for 95% that we want 5% so thats 2.5% each side.
+# 4 - Conclude, interpret the conf int in context of the problem
+
+# Hypothesis testing for proportions
+
+# h0 - p = 0.5, borrows would evenly support for and against
+# ha - p != 0.5, majority borrowers would support or oppose
+
+# with pbar = 0.51, successfailure conditions still hodl so i say
+# yes, they do support
+
+pbar = 0.51
+se = (pbar * (1 - pbar) / n)**0.5
+
+zscore = (pbar - 0.5) / se 
+
+zscore = 0.59 # Rounding error throwing off my calc, so hard coded
+# to be same value as textbook to make sure i was doing things right
+
+# To get p value we use pnorm() with the zscore calc'd, but i think..
+# We do 1 minus pnorm() to get the lower tail only (which is one side)
+# Then we multiply it by 2 to have it on both sides since we want to 
+# know if we are above 0.5 or below as oer our alt hypothesis.
+pvalue = (1 - pnorm(zscore)) * 2
+
+# Since our pvalue is greater than 0.05, we do not reject the null
+# hypothesis and we can say there is not convincing evidence to prove
+# that a majority of the payday loan borrowers support or oppose
+# the new regulations.
+
+# Choosing a sample size to estimate a proportion
+
+# if you goal is to find the amount of participants needed to end
+# up with a conf int less than 0.04 using a 95% conf int
+# then all you need to do is solve
+
+zstar * (pbar (1 - pbar) / n)**0.5 < 0.04
+
+# seems complicated but it's not, we need pbar and n. N is what we
+# are trying to find so we solve for it
+
+n = zstar**2 * pbar *(1 - pbar) / 0.04**2 
+
+zstar = qnorm(0.95)
+
+first_model = zstar**2 * 0.017 * (1 - 0.017) / 0.01**2
+second_model = zstar**2 * 0.062 * (1 - 0.062) / 0.01**2
+third_model = zstar**2 * 0.013 * (1 - 0.013) / 0.01**2
+
+
+# payday loan final question
+
+1.96**2 * 0.7*(1-0.7) / 0.05**2

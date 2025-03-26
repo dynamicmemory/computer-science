@@ -1,0 +1,25 @@
+Week 3 Probability
+
+Addition rule for disjoint events:
+
+male = 60 / 100
+gay = 18 / 100
+male & gay = 11 / 100
+
+Therefore the probability of a male or gay is:
+P(A or B) = P(a) + P(b) - P(a & b)
+          = (60 + 18 - 11) / 100
+          = 67 / 100
+          = 0.67 or 67%
+
+Multiplication for independent events:
+
+For the probability of female AND gay:
+
+female = 40 / 100
+gay = 18 / 100
+
+P(A & B) = 40/100 * 18/100 
+         = 0.072 or 7.2%
+
+

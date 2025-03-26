@@ -1,0 +1,62 @@
+"../hunter_bidens_laptop/pdiddys_guestlist/epsteins_flightlogs/random_csvs/A2_data.csv"
+
+data <- read.csv("../workshop-datasets/A2_data.csv")
+
+str(data)
+attach(data)
+##############################################################################
+# Question 1 - Is there a difference in javelin performance between athletes 
+# participating in the Decathlon and the Heptathlon. 
+
+# Exploratory analysis
+boxplot(javelin~sport, ylab="Javelin Score (meters)", xlab="Sport", 
+        col=c("lightblue", "brown"))
+
+# Decathlon median javelin scores are much higher then heptathlon median scores
+# Interquartile ranges do not overlap at all, visually Decathlon score are much
+# higher. One thing to note is the single outlier that may be a problem when 
+# observing our data for normality.
+
+# Test choice
+# We will use a two way t-test to compare the means of the athletes in each 
+# event to test for a significant difference between the two.
+
+# Hypothesis
+# ho: - The mean javelin score for one sport will be no different from the mean
+#       javelin score for another sport. avg1 = avg2 (add mu symbols and subscripts)
+
+# ha: - The mean javelin scores for each sport will be difference from one
+#        another. avg1 != avg2
+
+# Test Conditions
+# Independence - Every athlete is an individual and independent bean
+# Normal distribution - We will test this with a qqplot
+
+sports <- factor(sport)
+
+qqnorm(javelin, col=sports)
+qqline(javelin, col = "black")
+# although most of our points land on the qq line, the tails do not and they get 
+# further away from the line the further they move away frmo the center of the 
+# data, this creates somewhat of an S bend in our data. Because of this we will
+# run a sharpio test to see what it thinks about the distribution of our data
+
+shapiro.test(javelin)
+# So we got a pvalue of 0.000049, which is far below the threshold 0.05 which 
+# determines if our data is normal or not, because of this and the qqplot, it
+# it safe to say that our data does not have a normal distribution, nevertheless
+# we will continue with the question for the assignments sake and administer a 
+# two sampled t-test.
+
+decathlon <- subset(data, sport=="Decathlon")
+heptathlon <- subset(data, sport=="Heptathlon")
+
+hist(decathlon$javelin)
+hist(heptathlon$javelin)
+# Ok so both distributions actually look fairly normal so i may have made a 
+# mistake along the way, tomorrow we will see where that may have been!
+
+
+
+# The test
+t.test(javelin~sport)

@@ -1,0 +1,271 @@
+Island,Town,Sex,Stage,Count
+Ironbard,Hofn,Male,Child,280
+Ironbard,Hofn,Male,Teenager,195
+Ironbard,Hofn,Male,YoungAdult,211
+Ironbard,Hofn,Male,MiddleAge,351
+Ironbard,Hofn,Male,Retired,18
+Ironbard,Hofn,Female,Child,271
+Ironbard,Hofn,Female,Teenager,240
+Ironbard,Hofn,Female,YoungAdult,215
+Ironbard,Hofn,Female,MiddleAge,364
+Ironbard,Hofn,Female,Retired,26
+Ironbard,Vardo,Male,Child,184
+Ironbard,Vardo,Male,Teenager,137
+Ironbard,Vardo,Male,YoungAdult,167
+Ironbard,Vardo,Male,MiddleAge,209
+Ironbard,Vardo,Male,Retired,23
+Ironbard,Vardo,Female,Child,220
+Ironbard,Vardo,Female,Teenager,121
+Ironbard,Vardo,Female,YoungAdult,163
+Ironbard,Vardo,Female,MiddleAge,211
+Ironbard,Vardo,Female,Retired,27
+Ironbard,Helvig,Male,Child,148
+Ironbard,Helvig,Male,Teenager,57
+Ironbard,Helvig,Male,YoungAdult,123
+Ironbard,Helvig,Male,MiddleAge,170
+Ironbard,Helvig,Male,Retired,78
+Ironbard,Helvig,Female,Child,131
+Ironbard,Helvig,Female,Teenager,52
+Ironbard,Helvig,Female,YoungAdult,119
+Ironbard,Helvig,Female,MiddleAge,162
+Ironbard,Helvig,Female,Retired,84
+Ironbard,Blonduos,Male,Child,57
+Ironbard,Blonduos,Male,Teenager,90
+Ironbard,Blonduos,Male,YoungAdult,47
+Ironbard,Blonduos,Male,MiddleAge,173
+Ironbard,Blonduos,Male,Retired,71
+Ironbard,Blonduos,Female,Child,60
+Ironbard,Blonduos,Female,Teenager,81
+Ironbard,Blonduos,Female,YoungAdult,40
+Ironbard,Blonduos,Female,MiddleAge,177
+Ironbard,Blonduos,Female,Retired,69
+Ironbard,Helluland,Male,Child,40
+Ironbard,Helluland,Male,Teenager,114
+Ironbard,Helluland,Male,YoungAdult,18
+Ironbard,Helluland,Male,MiddleAge,186
+Ironbard,Helluland,Male,Retired,50
+Ironbard,Helluland,Female,Child,40
+Ironbard,Helluland,Female,Teenager,95
+Ironbard,Helluland,Female,YoungAdult,14
+Ironbard,Helluland,Female,MiddleAge,195
+Ironbard,Helluland,Female,Retired,52
+Ironbard,Bjurholm,Male,Child,50
+Ironbard,Bjurholm,Male,Teenager,61
+Ironbard,Bjurholm,Male,YoungAdult,46
+Ironbard,Bjurholm,Male,MiddleAge,176
+Ironbard,Bjurholm,Male,Retired,73
+Ironbard,Bjurholm,Female,Child,58
+Ironbard,Bjurholm,Female,Teenager,74
+Ironbard,Bjurholm,Female,YoungAdult,49
+Ironbard,Bjurholm,Female,MiddleAge,179
+Ironbard,Bjurholm,Female,Retired,66
+Providence,Hayarano,Male,Child,71
+Providence,Hayarano,Male,Teenager,57
+Providence,Hayarano,Male,YoungAdult,43
+Providence,Hayarano,Male,MiddleAge,229
+Providence,Hayarano,Male,Retired,53
+Providence,Hayarano,Female,Child,72
+Providence,Hayarano,Female,Teenager,56
+Providence,Hayarano,Female,YoungAdult,57
+Providence,Hayarano,Female,MiddleAge,234
+Providence,Hayarano,Female,Retired,40
+Providence,Akkeshi,Male,Child,60
+Providence,Akkeshi,Male,Teenager,124
+Providence,Akkeshi,Male,YoungAdult,17
+Providence,Akkeshi,Male,MiddleAge,205
+Providence,Akkeshi,Male,Retired,80
+Providence,Akkeshi,Female,Child,34
+Providence,Akkeshi,Female,Teenager,109
+Providence,Akkeshi,Female,YoungAdult,26
+Providence,Akkeshi,Female,MiddleAge,207
+Providence,Akkeshi,Female,Retired,68
+Providence,Reading,Male,Child,240
+Providence,Reading,Male,Teenager,193
+Providence,Reading,Male,YoungAdult,175
+Providence,Reading,Male,MiddleAge,306
+Providence,Reading,Male,Retired,29
+Providence,Reading,Female,Child,215
+Providence,Reading,Female,Teenager,212
+Providence,Reading,Female,YoungAdult,161
+Providence,Reading,Female,MiddleAge,315
+Providence,Reading,Female,Retired,28
+Providence,Nelson,Male,Child,93
+Providence,Nelson,Male,Teenager,84
+Providence,Nelson,Male,YoungAdult,50
+Providence,Nelson,Male,MiddleAge,184
+Providence,Nelson,Male,Retired,71
+Providence,Nelson,Female,Child,70
+Providence,Nelson,Female,Teenager,76
+Providence,Nelson,Female,YoungAdult,46
+Providence,Nelson,Female,MiddleAge,186
+Providence,Nelson,Female,Retired,52
+Providence,Biruwa,Male,Child,143
+Providence,Biruwa,Male,Teenager,87
+Providence,Biruwa,Male,YoungAdult,125
+Providence,Biruwa,Male,MiddleAge,185
+Providence,Biruwa,Male,Retired,51
+Providence,Biruwa,Female,Child,128
+Providence,Biruwa,Female,Teenager,89
+Providence,Biruwa,Female,YoungAdult,129
+Providence,Biruwa,Female,MiddleAge,168
+Providence,Biruwa,Female,Retired,33
+Providence,Shinobi,Male,Child,46
+Providence,Shinobi,Male,Teenager,105
+Providence,Shinobi,Male,YoungAdult,25
+Providence,Shinobi,Male,MiddleAge,196
+Providence,Shinobi,Male,Retired,54
+Providence,Shinobi,Female,Child,52
+Providence,Shinobi,Female,Teenager,121
+Providence,Shinobi,Female,YoungAdult,30
+Providence,Shinobi,Female,MiddleAge,224
+Providence,Shinobi,Female,Retired,42
+Providence,Kiyobico,Male,Child,152
+Providence,Kiyobico,Male,Teenager,102
+Providence,Kiyobico,Male,YoungAdult,132
+Providence,Kiyobico,Male,MiddleAge,206
+Providence,Kiyobico,Male,Retired,61
+Providence,Kiyobico,Female,Child,157
+Providence,Kiyobico,Female,Teenager,116
+Providence,Kiyobico,Female,YoungAdult,141
+Providence,Kiyobico,Female,MiddleAge,200
+Providence,Kiyobico,Female,Retired,57
+Providence,Takazaki,Male,Child,35
+Providence,Takazaki,Male,Teenager,88
+Providence,Takazaki,Male,YoungAdult,15
+Providence,Takazaki,Male,MiddleAge,223
+Providence,Takazaki,Male,Retired,80
+Providence,Takazaki,Female,Child,29
+Providence,Takazaki,Female,Teenager,65
+Providence,Takazaki,Female,YoungAdult,23
+Providence,Takazaki,Female,MiddleAge,189
+Providence,Takazaki,Female,Retired,61
+Providence,Acadia,Male,Child,375
+Providence,Acadia,Male,Teenager,361
+Providence,Acadia,Male,YoungAdult,305
+Providence,Acadia,Male,MiddleAge,643
+Providence,Acadia,Male,Retired,23
+Providence,Acadia,Female,Child,376
+Providence,Acadia,Female,Teenager,398
+Providence,Acadia,Female,YoungAdult,291
+Providence,Acadia,Female,MiddleAge,666
+Providence,Acadia,Female,Retired,26
+Bonne Sante,Nidoma,Male,Child,36
+Bonne Sante,Nidoma,Male,Teenager,46
+Bonne Sante,Nidoma,Male,YoungAdult,36
+Bonne Sante,Nidoma,Male,MiddleAge,214
+Bonne Sante,Nidoma,Male,Retired,91
+Bonne Sante,Nidoma,Female,Child,40
+Bonne Sante,Nidoma,Female,Teenager,63
+Bonne Sante,Nidoma,Female,YoungAdult,31
+Bonne Sante,Nidoma,Female,MiddleAge,208
+Bonne Sante,Nidoma,Female,Retired,81
+Bonne Sante,Talu,Male,Child,186
+Bonne Sante,Talu,Male,Teenager,48
+Bonne Sante,Talu,Male,YoungAdult,168
+Bonne Sante,Talu,Male,MiddleAge,200
+Bonne Sante,Talu,Male,Retired,92
+Bonne Sante,Talu,Female,Child,166
+Bonne Sante,Talu,Female,Teenager,51
+Bonne Sante,Talu,Female,YoungAdult,149
+Bonne Sante,Talu,Female,MiddleAge,190
+Bonne Sante,Talu,Female,Retired,90
+Bonne Sante,Riroua,Male,Child,105
+Bonne Sante,Riroua,Male,Teenager,85
+Bonne Sante,Riroua,Male,YoungAdult,91
+Bonne Sante,Riroua,Male,MiddleAge,195
+Bonne Sante,Riroua,Male,Retired,82
+Bonne Sante,Riroua,Female,Child,120
+Bonne Sante,Riroua,Female,Teenager,87
+Bonne Sante,Riroua,Female,YoungAdult,89
+Bonne Sante,Riroua,Female,MiddleAge,181
+Bonne Sante,Riroua,Female,Retired,66
+Bonne Sante,Pauma,Male,Child,92
+Bonne Sante,Pauma,Male,Teenager,84
+Bonne Sante,Pauma,Male,YoungAdult,59
+Bonne Sante,Pauma,Male,MiddleAge,176
+Bonne Sante,Pauma,Male,Retired,60
+Bonne Sante,Pauma,Female,Child,68
+Bonne Sante,Pauma,Female,Teenager,89
+Bonne Sante,Pauma,Female,YoungAdult,64
+Bonne Sante,Pauma,Female,MiddleAge,178
+Bonne Sante,Pauma,Female,Retired,56
+Bonne Sante,Gordes,Male,Child,31
+Bonne Sante,Gordes,Male,Teenager,77
+Bonne Sante,Gordes,Male,YoungAdult,24
+Bonne Sante,Gordes,Male,MiddleAge,198
+Bonne Sante,Gordes,Male,Retired,88
+Bonne Sante,Gordes,Female,Child,37
+Bonne Sante,Gordes,Female,Teenager,63
+Bonne Sante,Gordes,Female,YoungAdult,17
+Bonne Sante,Gordes,Female,MiddleAge,192
+Bonne Sante,Gordes,Female,Retired,91
+Bonne Sante,Maeva,Male,Child,87
+Bonne Sante,Maeva,Male,Teenager,81
+Bonne Sante,Maeva,Male,YoungAdult,107
+Bonne Sante,Maeva,Male,MiddleAge,201
+Bonne Sante,Maeva,Male,Retired,77
+Bonne Sante,Maeva,Female,Child,109
+Bonne Sante,Maeva,Female,Teenager,70
+Bonne Sante,Maeva,Female,YoungAdult,98
+Bonne Sante,Maeva,Female,MiddleAge,186
+Bonne Sante,Maeva,Female,Retired,66
+Bonne Sante,Valais,Male,Child,52
+Bonne Sante,Valais,Male,Teenager,83
+Bonne Sante,Valais,Male,YoungAdult,33
+Bonne Sante,Valais,Male,MiddleAge,184
+Bonne Sante,Valais,Male,Retired,67
+Bonne Sante,Valais,Female,Child,53
+Bonne Sante,Valais,Female,Teenager,89
+Bonne Sante,Valais,Female,YoungAdult,33
+Bonne Sante,Valais,Female,MiddleAge,175
+Bonne Sante,Valais,Female,Retired,69
+Bonne Sante,Kinsale,Male,Child,171
+Bonne Sante,Kinsale,Male,Teenager,73
+Bonne Sante,Kinsale,Male,YoungAdult,141
+Bonne Sante,Kinsale,Male,MiddleAge,195
+Bonne Sante,Kinsale,Male,Retired,101
+Bonne Sante,Kinsale,Female,Child,178
+Bonne Sante,Kinsale,Female,Teenager,82
+Bonne Sante,Kinsale,Female,YoungAdult,147
+Bonne Sante,Kinsale,Female,MiddleAge,188
+Bonne Sante,Kinsale,Female,Retired,92
+Bonne Sante,Colmar,Male,Child,582
+Bonne Sante,Colmar,Male,Teenager,402
+Bonne Sante,Colmar,Male,YoungAdult,463
+Bonne Sante,Colmar,Male,MiddleAge,927
+Bonne Sante,Colmar,Male,Retired,45
+Bonne Sante,Colmar,Female,Child,597
+Bonne Sante,Colmar,Female,Teenager,434
+Bonne Sante,Colmar,Female,YoungAdult,467
+Bonne Sante,Colmar,Female,MiddleAge,857
+Bonne Sante,Colmar,Female,Retired,40
+Bonne Sante,Vaiku,Male,Child,68
+Bonne Sante,Vaiku,Male,Teenager,64
+Bonne Sante,Vaiku,Male,YoungAdult,38
+Bonne Sante,Vaiku,Male,MiddleAge,171
+Bonne Sante,Vaiku,Male,Retired,100
+Bonne Sante,Vaiku,Female,Child,56
+Bonne Sante,Vaiku,Female,Teenager,70
+Bonne Sante,Vaiku,Female,YoungAdult,39
+Bonne Sante,Vaiku,Female,MiddleAge,156
+Bonne Sante,Vaiku,Female,Retired,75
+Bonne Sante,Mahuti,Male,Child,247
+Bonne Sante,Mahuti,Male,Teenager,324
+Bonne Sante,Mahuti,Male,YoungAdult,141
+Bonne Sante,Mahuti,Male,MiddleAge,499
+Bonne Sante,Mahuti,Male,Retired,36
+Bonne Sante,Mahuti,Female,Child,242
+Bonne Sante,Mahuti,Female,Teenager,366
+Bonne Sante,Mahuti,Female,YoungAdult,117
+Bonne Sante,Mahuti,Female,MiddleAge,481
+Bonne Sante,Mahuti,Female,Retired,18
+Bonne Sante,Eden,Male,Child,11
+Bonne Sante,Eden,Male,Teenager,61
+Bonne Sante,Eden,Male,YoungAdult,116
+Bonne Sante,Eden,Male,MiddleAge,226
+Bonne Sante,Eden,Male,Retired,40
+Bonne Sante,Eden,Female,Child,145
+Bonne Sante,Eden,Female,Teenager,65
+Bonne Sante,Eden,Female,YoungAdult,112
+Bonne Sante,Eden,Female,MiddleAge,224
+Bonne Sante,Eden,Female,Retired,39

@@ -1,0 +1,26 @@
+{
+    "id": "9E043439",
+    "path": "//wsl.localhost/Ubuntu/home/hahn/server/STAT100-intro-to-stats/R/chapter-8-linear-regression.R",
+    "project_path": "chapter-8-linear-regression.R",
+    "type": "r_source",
+    "hash": "3684116979",
+    "contents": "",
+    "dirty": false,
+    "created": 1733178816930.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "106,20",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1733188019,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1733188019266,
+    "read_only": false,
+    "read_only_alternatives": []
+}

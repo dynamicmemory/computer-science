@@ -1,0 +1,26 @@
+{
+    "id": "B82943C5",
+    "path": "//wsl.localhost/Ubuntu/home/hahn/server/STAT100-intro-to-stats/R/exam_revision.R",
+    "project_path": "exam_revision.R",
+    "type": "r_source",
+    "hash": "160828535",
+    "contents": "",
+    "dirty": false,
+    "created": 1736806455323.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "184,12",
+        "scrollLine": "158"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1736983755,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1736983755459,
+    "read_only": false,
+    "read_only_alternatives": []
+}

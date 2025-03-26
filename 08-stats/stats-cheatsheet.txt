@@ -1,0 +1,113 @@
+
+Explanatory Variables - The name we give a variable when we think it may affect
+another variable.
+
+Response variables - The response or outcome of a test or event.
+
+Probability
+
+Disjoint or mutually exclusive outcomes
+Two outcomes are called disjoint or mutually exclusive if they both cannot
+happen.
+
+Addition rule of disjoint outcomes:
+If A1 and A2 are two disjoint outcomes then we just add them together.
+example:
+Rolling a 1 or a 2 on a dice =
+1/6 + 1/6 = 1/3
+
+For any two events where the outcomes are disjoint or not we have a general rule
+we can apply:
+
+P(A or B) = P(A) + P(B) - P(A and B)
+So rolling a 1 or 2 (which is disjoint, but still works) is:
+1/6 + 1/6 - 0/6 (as we cannot roll both a 1 and 2 so the prob is 0) = 1/3
+
+Picking a diamond or a face card from a regular deck of cards
+13/52 + 12/52 - 3/52 = 22/52 = 11/26
+
+Rules for probability distributions:
+1. The outcomes listed must be disjoint.
+2. Each probability must be between 0 and 1.
+3. The probabilities must total 1.
+
+The complement of an event is essentially the opposite or whatever is left over
+or not in event A. A and it's complement Ac are mathmatically related:
+
+P(A) + P(Ac) = 1 or P(A) = 1 - P(Ac)
+
+For independent events, i.e two different die both rolling a 1
+P(A and B) = P(A) x P(B) 
+This is different to before where it was one die rolling a 1 two times.
+
+###### CONDITIONAL PROBABILITY ######
+If a probability is based on a single variable, it is a marginal probability.
+The probability of outcomes for two or more variables or processes is called a
+joint probability.
+
+The conditional probability of outcome A given condition B is computed as the
+following:
+P(A|B) = P(A and B) / P(B)
+
+Previously I wrote a formula for general multiplication for indepedent events,
+we can generalize the rule for events that might not be independent.
+If A and B represent two outcomes or events, then
+P(A and B) = P(A|B) x P(B)
+
+It is useful to think of A and as the outcome of interest and B as the
+condition.
+
+
+
+
+Single t tests
+Paired t tests
+Anova t test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hypothesis testing
+Normal distro
+Bnomial
+p-value
+Single means T
+Paired T
+ANOVA
+
+One-sample T-test
+Independent T-test
+Paired T-test
+
+ANOVA 
+- Formula for all of the calculations and explanations as to what happens to the results if each parameter is manipulated.
+I.e more observations, independence, larger variance.

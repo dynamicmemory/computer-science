@@ -1,0 +1,26 @@
+{
+    "id": "3AA540A3",
+    "path": "~/server/STAT100-intro-to-stats/R/ass2.R",
+    "project_path": "ass2.R",
+    "type": "r_source",
+    "hash": "1858897504",
+    "contents": "",
+    "dirty": true,
+    "created": 1734042463900.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "7,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1734312818,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1734655776964,
+    "read_only": false,
+    "read_only_alternatives": []
+}
