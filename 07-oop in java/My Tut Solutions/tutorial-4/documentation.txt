@@ -1,0 +1,68 @@
+Brief run down of requirements
+1. Create an app for a pet adoption service
+2. Dogs are the main pet they adopt out
+3. Users need to be able to search the services db for dogs that meet their querying
+4. Criteria should include
+  - breed
+  - age
+  - sex
+  - desexed status
+
+5. If a dog exists in the db that matches the users query then show them that dog
+6. A user can then choose if they want to adopt a dog from the matching results
+7. If they do they must supply name, email, phone number and that info must be saved
+
+App possible pathways
+
+A) Dog doesnt exist
+1. User opens app, and searches for a pup
+2. No dog matches search results
+3. Apps lets user know and asks if they would like to search again or exit
+
+B) Dog does exist
+1. User opens app, and searches for a pup
+2. one pup matches their criteria
+3. asked if they want that pup
+4. answered yes, ask for their details
+5. Complimentary message and exit
+
+C) Alternate to above from step 3
+.4 answered no, asks if they would like to search again or exit
+
+D) Second alternate to above from step 2.
+2. More then one pup exists that match their criteria
+3. asked which one they would like to adopt
+4. If yes, follows B if no follow C
+
+UML Diagrams
+
+Class Dog
+Attributes
+- String name
+- long microchip
+- int age
+- String breed
+- Boolean Desexed
+- String sex
+Functions
+- getters for all attritubtes
+- setters maybe for just desexed?
+
+Person (Unsure about this class as i could just ask for there infor on the spot and instatnly place it in a file)
+Attributes
+- String name
+- String email
+- long phonenum
+Functions
+- Getters and setters
+
+AllDogs
+attribute
+- dogDatabase Map<long, Set>
+
+FindADog
+Attributes
+
+Functions
+- Main()
+- UsersDreamDog() Dog

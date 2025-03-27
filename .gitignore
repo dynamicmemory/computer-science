@@ -7,16 +7,16 @@ textbooks/
 .bsp/
 .scala-build/
 .DS_Store/
+.venv
 
 # Remove these once i fix the repo
-06-data science/Topic 35 - K-Means Clustering/Reviews.csv
-06-data science/Topic 32 - AdaBoost Classifiers/creditcard.csv
-06-data science/Topic*
+06-data science/topics
+07-oop in java/lectures
+
 
 # Remove these as i sort out the old subjects ive done.
-06-d*
-07-o*
 16-s*
 19-p*
 25-s*
 26-d*
+
