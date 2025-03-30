@@ -1,6 +1,7 @@
 *.mp4
 *.mkv
 textbooks/
+notes/
 
 .ipynb_checkpoints
 .metals/
@@ -9,6 +10,9 @@ textbooks/
 .DS_Store/
 .venv
 
+.Rproj.user
+.RData
+.Rhistory
 # Remove these once i fix the repo
 06-data science/topics
 07-oop in java/lectures

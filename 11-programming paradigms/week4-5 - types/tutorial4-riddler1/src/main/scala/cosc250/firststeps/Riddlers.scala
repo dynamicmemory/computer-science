@@ -67,17 +67,23 @@ def notWorthItsWeightInLetters:Int =  ???
    * Suppose we have a Tower of Hanoi set.
    * https://en.wikipedia.org/wiki/Tower_of_Hanoi
    * 
-   * There are three pegs, from left to right. There are 3 discs, increasing in size, all of which start on the first peg.
-   * On any given turn, the player can move the topmost disc from one peg and place it on another peg, so long
+   * There are three pegs, from left to right. There are 3 discs, increasing in 
+   size, all of which start on the first peg.
+   * On any given turn, the player can move the topmost disc from one peg and 
+   place it on another peg, so long
    * as it would not put it on a smaller disc.
    * 
-   * In this puzzle, we're not going to try for the minimum number of moves. Instead, we're going to say that
-   * the the player *always makes a random legal move*. Your job is to measure, over 100 runs, what the average
-   * number of moves is before the Tower is solved (before all the discs are in order on the last peg).
+   * In this puzzle, we're not going to try for the minimum number of moves. 
+   Instead, we're going to say that
+   * the the player *always makes a random legal move*. Your job is to measure, 
+   over 100 runs, what the average
+   * number of moves is before the Tower is solved (before all the discs are in 
+     order on the last peg).
    * 
    * For this riddle, I've defined some extension methods for you to complete.
    * 
-   * This lets you say things like state.isValid(move) and state.move(move), even though State is just a Seq[Seq[]] 
+   * This lets you say things like state.isValid(move) and state.move(move), 
+   even though State is just a Seq[Seq[]] 
    * 
    */
 type Peg = Seq[Int]
@@ -99,7 +105,7 @@ extension (s:HanoiState)
    * E.g. Seq(Seq(1, 2, 3), Seq(), Seq()) is valid, but Seq(Seq(1, 3, 2), Seq(), Seq()) is not.
    */
   def isValid:Boolean = ???
-
+    
   /** A state is "done" if all three numbers are in the last sequence (i.e. all discs are on the last peg) */
   def isDone:Boolean = ???
 

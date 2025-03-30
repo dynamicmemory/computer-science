@@ -1,13 +1,13 @@
 package cosc250.firststeps
 
-
 /** 
  * Rotate a list N places to the left. For instance 
  * rotate(3, List(1, 2, 3, 4, 5, 6)) would be List(4, 5, 6, 1, 2, 3)
  */
 def rotate[T](by:Int, list:List[T]):List[T] = 
-  ???
-/**
+  val l = list.splitAt(by)
+  l._1 ::: l._2
+  /**
  * Pack consecutive duplicates in a list into sublists
  * 
  * For instance pack(List(1, 1, 1, 2, 2, 3, 4, 4))
@@ -15,7 +15,12 @@ def rotate[T](by:Int, list:List[T]):List[T] =
  * 
  */
 def pack[T](list:List[T]):List[List[T]] = 
-  ???
+  list match {
+    case Nil => Nil
+    case head :: tail => val (value, rest) = list.span(_ == head)  
+      value :: pack(rest)
+  }
+
 /**
  * Sort a list of lists according to the length of the sublist
  * 
@@ -23,7 +28,7 @@ def pack[T](list:List[T]):List[List[T]] =
  * would be List(List(4), List(2, 2), List(1, 1, 1))
  */
 def sortByLength[T](outer:List[List[T]]):List[List[T]] = 
-  ???
+  outer.sortBy(_.length) 
 /**
  * FoldLeft on a tree
  * 
@@ -36,9 +41,9 @@ def sortByLength[T](outer:List[List[T]]):List[List[T]] =
  */ 
 enum Tree[+T]:
   def foldLeft[B](start:B)(f: (B, T) => B):B = this match
-    case Empty => ???
-    case Branch(left, right) => ???
-    case Leaf(value) => ???
+    case Empty => start
+    case Branch(left, right) => right.foldLeft(left.foldLeft(start)(f))(f)
+    case Leaf(value) => f(start, value)
 
   case Empty
   case Branch(left:Tree[T], right:Tree[T])
@@ -58,5 +63,5 @@ extension (t:Tree[Int])
 @main def practiceMain = 
 
   // println(rotate(3, List(1,2,3,4,5,6))) 
-  println(pack(List(1,1,1,2,2,3,4,4)))
+  // println(pack(List(1,1,1,2,2,3,4,4)))
   println(sortByLength(List(List(1), List(2,2,2), List(3,3,3,3,3), List(4,4))))

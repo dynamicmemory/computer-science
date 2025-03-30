@@ -37,5 +37,16 @@ given corkscrew:Openable[Wine] with
 
 @main def main(): Unit = {
 
-  pour(Wine("pinoit noir"))
+  val one = "hello"
+  val two = "holpy"
+
+  val list = for 
+    x <- one.zipWithIndex
+    y <- two.zipWithIndex if (x._1 == y._1)
+  yield(x._2, y._2)
+
+  println(list)
+
+
+  // pour(Wine("pinoit noir"))
 }
