@@ -1,77 +1,112 @@
 #include<list>
 #include<algorithm>
 #include<iostream>
+#include <ostream>
 #include<string>
 #include<fstream>
 using namespace std;
 
-int menu()
-{
+class Passenger {
+friend std::ostream& operator<<(std::ostream&, const Passenger&);
+public:
+    Passenger(): fname(), lname(), destination() {}
+    Passenger(std::string first, std::string last) : fname(first), lname(last) {} 
+    Passenger(std::string first, std::string last, std::string dest) : 
+        fname(first), lname(last), destination(dest) {}
+    bool operator==(const Passenger&) const;
+    bool operator<(const Passenger&) const;
+
+private:
+    std::string fname;
+    std::string lname;
+    std::string destination;
+};
+
+std::ostream& operator<<(std::ostream& output, const Passenger& p) {
+    output << p.fname << " " << p.lname << " " << p.destination;
+
+    return output;
+}
+
+bool Passenger::operator==(const Passenger& rhs) const {
+    return fname == rhs.fname && lname == rhs.lname;
+}
+
+bool Passenger::operator<(const Passenger& rhs) const {
+    return lname < rhs.lname;
+}
+
+int menu(){
 	int option;
-	cout << endl;
-	cout << "Enter one of the following options:" << endl;
-	cout << "1. load reservations from file:" << endl;
-	cout << "2. reserve a ticket" << endl;
-	cout << "3. cancel a reservation" << endl;
-	cout << "4. check reservation" << endl;
-	cout << "5. display passenger list" << endl; 
-	cout << "6. save passenger list" << endl;
-	cout << "7. exit" << endl << endl;
-	cin >> option;
-	cin.get();
+    std::cout << "\nEnter one of the following options:\n"
+        << "1. load reservations from file:\n"
+	    << "2. reserve a ticket\n"
+	    << "3. cancel a reservation\n"
+	    << "4. check reservation\n"
+	    << "5. display passenger list\n" 
+	    << "6. save passenger list\n"
+	    << "7. exit\n" << endl;
+    std::cin >> option;
+    std::cin.get();
 	return option;
 }
 
-void read_from_file(list<string>& flist, string filename)
-{
-	string name;
-	ifstream input(filename.c_str());
-	while (input >> name) 
-	{					
-		flist.push_back(name);
+void read_from_file(std::list<Passenger>& flist, std::string filename) {
+    std::string fname;
+    std::string lname;
+    std::string destination;
+    ifstream input(filename.c_str());
+	while (input >> fname >> lname >> destination) {					
+		flist.push_back(Passenger(fname, lname, destination));
 	}
 	input.close();
 }
 
-void insert(list<string>& flist, string name)
-{
-	flist.push_back(name);
+void insert(std::list<Passenger>& flist, std::string fname, std::string lname, 
+        std::string destination) {
+
+    Passenger p = Passenger(fname, lname, destination);
+	flist.push_back(p);
 }
 
-void remove(list<string>& flist, string name)
-{
-	flist.remove(name);
-}
-
-bool check_reservation(list<string>& flist, string name)
-{
-	list<string>::iterator i1, i2;
+void remove(list<Passenger>& flist, std::string fname, std::string lname) {
+    Passenger p(fname, lname);    
+    std::list<Passenger>::iterator i1, i2;
 	i1 = flist.begin();
 	i2 = flist.end();
-	return (find(i1, i2, name) != i2);
+	for ( ; i1 != i2; i1++) 
+        if (*i1 == p) {
+            flist.remove(p);
+            break;
+        }
 }
 
-void display_list(list<string>& flist)
-{
+bool check_reservation(list<Passenger>& flist, std::string fname, std::string lname) {
+	list<Passenger>::iterator i1, i2;
+    Passenger p(fname, lname);
+	i1 = flist.begin();
+	i2 = flist.end();
+	return (find(i1, i2, p) != i2);
+}
+
+void display_list(std::list<Passenger>& flist) {
 	flist.sort();
-	list<string>::iterator i1, i2;
+    std::list<Passenger>::iterator i1, i2;
 	i1 = flist.begin();
 	i2 = flist.end();
 	for ( ; i1 != i2; ++i1) {
-		cout << *i1 << endl;
+        std::cout << *i1 << endl;
 	}
 }
 
-void save_to_file(list<string>& flist, string filename)
-{
+void save_to_file(std::list<Passenger>& flist, std::string filename) {
 	flist.sort();
-	list<string>::iterator i1, i2;
+	list<Passenger>::iterator i1, i2;
 	i1 = flist.begin();
 	i2 = flist.end();
 	ofstream output(filename.c_str());
 	for ( ; i1 != i2; ++i1) {
-		output << *i1 << " ";
+		output << *i1 << "\n";
 	}
 	output.close();
 }
-
