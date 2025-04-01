@@ -1,7 +1,9 @@
 package cosc250.firststeps
 
+
 /**
-  * We're going to create a little Sudoku teacher. It won't solve the whole puzzle, but it'll tell you if there's an
+  * We're going to create a little Sudoku teacher. It won't solve the whole 
+  puzzle, but it'll tell you if there's an
   * obvious next move.
   *
   * If you've never played Sudoku before, you can find how to play it here:
@@ -11,10 +13,12 @@ package cosc250.firststeps
 object SudokuSensei {
 
   /**
-    * First, let's introduce the concept of a type alias. This is where we give a convenient name to an existing type.
+    * First, let's introduce the concept of a type alias. This is where we give 
+    a convenient name to an existing type.
     * In this case, we've said that a Position in our grid is going to be an (Int, Int)
     *
-    * It's still a tuple -- we can still say `val(x, y) = pos` to extract x and y, but we can refer to the type as
+    * It's still a tuple -- we can still say `val(x, y) = pos` to extract x and y, 
+    but we can refer to the type as
     * a Position.
     */
   type Position = (Int, Int)
@@ -37,12 +41,14 @@ object SudokuSensei {
     val split = gridString.split('\n')
 
     // Notice the for notation -- this turns into flatMap, map, and filterWith
-    // the "if" in this part of the for notation translates to filterWith -- another higher order function
+    // the "if" in this part of the for notation translates to filterWith -- 
+    // another higher order function
     // also notice `0 until 9` produces `Seq(0,1,2,3,4,5,6,7,8)`
     val tuples:Seq[(Position, Int)] = for {
       x <- 0 until 9
       y <- 0 until 9 if split(y).charAt(x).isDigit
-    } yield (x, y) -> split(y).charAt(x).toString.toInt // if we just do char to int, we get the character code not the number
+    } yield (x, y) -> split(y).charAt(x).toString.toInt // if we just do char to 
+    // int, we get the character code not the number
 
     tuples.toMap
   }
@@ -77,14 +83,14 @@ object SudokuSensei {
     * Don't forget, Position is just an alias for a tuple (Int, Int)
     */
   def row(pos:Position):Seq[Position] = {
-    ???
+    (0 until 9).map(x => (x, pos._2))
   }
 
   /**
     * Now let's make a function that will return all the Positions in the same column
     */
   def column(pos:Position):Seq[Position] = {
-    ???
+    (0 until 9).map(x => (pos._1, x))
   }
 
   /**
@@ -95,14 +101,29 @@ object SudokuSensei {
     * So let's define that as a function. (No higher order functions required here)
     */
   def whichThree(n:Int):Seq[Int] = {
-    ???
+    n match 
+    case 0 => (0 to 2).toSeq
+    case 1 => (0 to 2).toSeq
+    case 2 => (0 to 2).toSeq
+    case 3 => (3 to 5).toSeq
+    case 4 => (3 to 5).toSeq
+    case 5 => (3 to 5).toSeq
+    case 6 => (6 to 8).toSeq
+    case 7 => (6 to 8).toSeq
+    case 8 => (6 to 8).toSeq
   }
 
   /**
     * And then let's use that function to return all the positions in the same quadrant.
     */
   def quadrant(pos:Position):Seq[Position] = {
-    ???
+    val (a: Int, b: Int) = pos
+
+    for 
+      x <- whichThree(pos._1)
+      y <- whichThree(pos._2)
+    yield(x, y)
+
   }
 
   /**
@@ -115,7 +136,7 @@ object SudokuSensei {
     * compiler is going to think we are trying to call them but forgot the parameters.
     */
   val positionFunctions:Seq[Position => Seq[Position]] = Seq(row, column, quadrant)
-
+    
 
   /**
     * Now let's define a function that can take a grid, a number, and a sequence of positions,
@@ -126,8 +147,9 @@ object SudokuSensei {
     *
     * And you might want to use the exists method -- a higher order function on sequences.
     */
-  def numberPresentIn(grid:Grid, n:Int, positions:Seq[Position]):Boolean = {
-    ???
+  def numberPresentIn(grid:Grid, n:Int, positions:Seq[Position]): Boolean = {
+    positions.exists(pos => grid.getOrElse(pos, false) == n)
+    //positions.exists(pos => grid.get(pos).contains(n))
   }
 
   /**
@@ -143,7 +165,7 @@ object SudokuSensei {
     * positionFunctions.exists(...
     */
   def possibilitiesFor(pos:Position, grid:Grid):Seq[Int] = {
-    ???
+    (1 to 8).filterNot(numberPresentIn(grid, _, positionFunctions.flatMap(f => f(pos)))) 
   }
 
   /**
@@ -152,7 +174,22 @@ object SudokuSensei {
     * what number goes there.
     */
   def nextMoves(grid:Grid):Seq[(Position, Int)] = {
-    ???
-  }
+    
+    val pos = for {
+      x <- 1 to 8 
+      y <- 1 to 8 
+      possibleNumbers = possibilitiesFor((x,y), grid)
+      if (possibleNumbers.size == 1)
+    }
+    yield ((x, y), possibleNumbers.head)
 
+    pos.toSeq
+   
+
+
+
+
+
+
+  }
 }

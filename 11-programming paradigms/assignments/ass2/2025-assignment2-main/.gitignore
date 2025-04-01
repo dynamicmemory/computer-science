@@ -2,6 +2,6 @@
 .metals/
 .scala-build/
 .vscode/
-*.js
+*ass2/2025*.js
 *.map
 

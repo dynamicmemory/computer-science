@@ -7,19 +7,22 @@ enum Player:
     case Black
     case White
 
-    // A convenience method so you can ask who the other player is, e.g. White.opponent is Black
+    // A convenience method so you can ask who the other player is, e.g. White.
+    // opponent is Black
     def opponent = this match {
         case Black => White
         case White => Black
     }
 
-/** A location on the board. Zero-indexed. Location is a type alias for (Int, Int). e.g. (0, 0) is the top-left */
+/** A location on the board. Zero-indexed. Location is a type alias for (Int, Int). 
+ e.g. (0, 0) is the top-left */
 type Location = (Int, Int)
 
 /** The board size is always 8 by 8 */
 val boardSize = 8
 
-/** We represent the board with a Map from location to player. Note that it might not have entries for all locations if a piece hasn't been played there. */
+/** We represent the board with a Map from location to player. Note that it might 
+ not have entries for all locations if a piece hasn't been played there. */
 type Board = Map[Location, Player]
 
 /** all the different directions a straight line can go in*/
@@ -41,10 +44,15 @@ def allDirections:Seq[Direction] = Direction.values.toSeq
 // If the start square is not on the board, return an empty Seq
 //
 // You'll need to implement this and might find it useful for "playingHereFlips"
-// (Because for each direction, you can ask for a walk from location + direction to the edge in that direction)
+// (Because for each direction, you can ask for a walk from location + direction
+// to the edge in that direction)
 def walkToEdge(start:Location, d:Direction):Seq[Location] = 
+  
+  // start match 
+    //case // x or y is greater then 7 or less then 0 return the empty set 
+    //case // until start x - direction x || start y - direction y is = 7 or 0
+           // keep applying the change x + dx, y + dy
     ???
-
 /** 
  * Defines some methods we can call on Locations.
  */
@@ -91,11 +99,15 @@ extension (board:Board) {
         ???
 
     /**
-      * If player p placed a piece in location l, what are the locations it would flip? You need to implement this.
+      * If player p placed a piece in location l, what are the locations it would
+      flip? You need to implement this.
       * 
-      * Hint: For each direction, get the locations that walk in that direction while it contains pieces (starting one step in that direction)
-      *       if there aren't any of your pieces, you can't capture anything (you've got nothing on the other side)
-      *       if there is one of your pieces on that line, take all the pieces up to your first piece on the line
+      * Hint: For each direction, get the locations that walk in that direction 
+        while it contains pieces (starting one step in that direction)
+      *       if there aren't any of your pieces, you can't capture anything 
+              (you've got nothing on the other side)
+      *       if there is one of your pieces on that line, take all the pieces 
+              up to your first piece on the line
       */
     def playingHereFlips(l:Location, p:Player):Seq[Location] = 
         ???
