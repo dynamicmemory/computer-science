@@ -1,0 +1,32 @@
+Use O notation to write the wirst case time bound for each of the following operations
+Explain how to find the memory addresses as well.
+
+a) 
+Inserting a new element at the head of a linked list 
+- O(1)
+
+Finding a given element in a linked list 
+- O(n)
+
+
+b)
+Inserting a new eleement at the tail of a dynamic array
+- O(1)
+
+
+Finding an element with a given index in an array 
+- O(1)
+
+
+Why dont we insert an element at the head of a dynamic array 
+- 
+
+
+c)
+Which data structure would you choose for operations thater frequently add and 
+remove data from a dynamic set
+
+
+
+Which data structure would you choose for operations that do frequent 1item lookups
+- Dynamic array 

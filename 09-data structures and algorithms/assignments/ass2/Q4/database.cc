@@ -4,10 +4,13 @@
 #include <ostream>
 #include<string>
 #include<fstream>
-using namespace std;
+// I would remove this but unsure if it will break something on the markers end.
+using namespace std;  // Bad practice 
 
 class Passenger {
+
 friend std::ostream& operator<<(std::ostream&, const Passenger&);
+
 public:
     Passenger(): fname(), lname(), destination() {}
     Passenger(std::string first, std::string last) : fname(first), lname(last) {} 
@@ -52,11 +55,12 @@ int menu(){
 }
 
 void read_from_file(std::list<Passenger>& flist, std::string filename) {
-    std::string fname;
-    std::string lname;
-    std::string destination;
+    std::string fname, lname, destination;
     ifstream input(filename.c_str());
+
+    // Read in all three data memeber variables 
 	while (input >> fname >> lname >> destination) {					
+        // Add a new passenger object to the list from the passed in values
 		flist.push_back(Passenger(fname, lname, destination));
 	}
 	input.close();
@@ -70,11 +74,15 @@ void insert(std::list<Passenger>& flist, std::string fname, std::string lname,
 }
 
 void remove(list<Passenger>& flist, std::string fname, std::string lname) {
+    // create a passenger object from passed in values
     Passenger p(fname, lname);    
     std::list<Passenger>::iterator i1, i2;
 	i1 = flist.begin();
 	i2 = flist.end();
+
+    // iterator over the list of passengers 
 	for ( ; i1 != i2; i1++) 
+        // remove a passenger from the list if they match the passed in values
         if (*i1 == p) {
             flist.remove(p);
             break;
