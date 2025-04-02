@@ -1,6 +1,7 @@
 package assignmentTwo.reversi
 
 import scala.collection.immutable.Queue
+import scala.annotation.tailrec
 
 /** The two players in Reversi */
 enum Player:
@@ -47,12 +48,17 @@ def allDirections:Seq[Direction] = Direction.values.toSeq
 // (Because for each direction, you can ask for a walk from location + direction
 // to the edge in that direction)
 def walkToEdge(start:Location, d:Direction):Seq[Location] = 
-  
-  // start match 
-    //case // x or y is greater then 7 or less then 0 return the empty set 
-    //case // until start x - direction x || start y - direction y is = 7 or 0
-           // keep applying the change x + dx, y + dy
-    ???
+
+    // Using a recursive function to get the sequence of squares moved
+    @tailrec
+    def recurseTheEdge(start: Location, d: Direction, squares: Seq[Location]): Seq[Location] =
+        if (start._1 >= 0 && start._1 < 8 && start._2 >= 0 && start._2 < 8)
+            recurseTheEdge((start._1 + d.dx, start._2 + d.dy), d, squares :+ (start._1, start._2))
+        else
+            squares
+
+    recurseTheEdge(start, d, Seq[Location]()) 
+    
 /** 
  * Defines some methods we can call on Locations.
  */
@@ -90,13 +96,13 @@ extension (l:Location) {
 extension (board:Board) {
 
     /** The number of pieces on the board. You need to implement this */
-    def pieces:Int = 
-        ???
+    def pieces:Int = board.size      
+      
         
 
     /** The number of pieces the given player has. You need to implement this */
     def piecesFor(p:Player):Int = 
-        ???
+        board.count((x, y) => y == p) 
 
     /**
       * If player p placed a piece in location l, what are the locations it would
@@ -110,15 +116,23 @@ extension (board:Board) {
               up to your first piece on the line
       */
     def playingHereFlips(l:Location, p:Player):Seq[Location] = 
-        ???
-        
+      Direction.values.foreach(dir => l+(dir)  
 
 
-    // Whether it'd be valid for player p to play in location l (assuming it's their turn). You need to implement this.
-    // Hint: If there are fewer than 4 pieces on the board, it is a valid move if it is in one of the centre squares that is not already occupied
+        l+(Direction.values.foreach(dir => walkToEdge(l, dir).foreach(square => if board())
+        for { 
+          dir <- Direction.values
+          square <- walkToEdge(l, dir)
+          if (
+        }
+
+    // Whether it'd be valid for player p to play in location l (assuming it's their turn). 
+    // You need to implement this.
+    // Hint: If there are fewer than 4 pieces on the board, it is a valid move 
+    // if it is in one of the centre squares that is not already occupied
     // Hint: Otherwise, it's a valid move if it is empty and flips more than 0 pieces.
     def isValidMove(l:Location, p:Player):Boolean = 
-        ???
+       ??? 
 
     // All the moves that are valid from this position for player p. You need to implement this.
     // Hint: Get a list of every location from (0, 0) to (7, 7) and filter it for the ones that are valid
@@ -127,7 +141,8 @@ extension (board:Board) {
 
     /** 
      * Returns a board where player p has placed a piece in location l. You need to implement this. 
-     * Don't forget to flip any necessary pieces (you wrote a function for finding out which ones), as well as placing this piece
+     * Don't forget to flip any necessary pieces (you wrote a function for finding out which ones), 
+     as well as placing this piece
      */
     def boardAfterMove(l:Location, p:Player):Board = 
         ??? 
@@ -148,6 +163,13 @@ extension (board:Board) {
             ).mkString
         ).mkString("\n")
 }
+
+// my main for testing, take this out
+@main
+def main(): Unit = 
+  println(walkToEdge((3,2), Direction.North))
+
+
 
 /** A companion object for Boards, just so we can have Board.fromPrettyString */
 object Board {
@@ -170,7 +192,8 @@ object Board {
   * The state of the board
   * 
   * @param lastMove - the location of the last move
-  * @param board - maps the locations of pieces on the board (note that if a piece has not been played in a square, it won't be in the map)
+  * @param board - maps the locations of pieces on the board (note that if a piece
+                    has not been played in a square, it won't be in the map)
   * @param turn - whose turn it is next. If the game is over, this is None.
   */
 case class GameState(lastMove:Option[(Location, Player)], board:Board, turn:Option[Player]) {
@@ -193,9 +216,11 @@ case class GameState(lastMove:Option[(Location, Player)], board:Board, turn:Opti
         }
 
     /** 
-     * Performs a move. You need to implement this. You can use board.boardAfterMove(turn) to get what the board should look like.
+     * Performs a move. You need to implement this. You can use board.boardAfterMove(turn)
+       to get what the board should look like.
      * Don't forget you'll need to work out whether it becomes the other player's turn. 
-     * Hint: Assume it does and create the next game state. Then ask the next game state for the number of valid moves. If it's zero, 
+     * Hint: Assume it does and create the next game state. Then ask the next game state
+       for the number of valid moves. If it's zero, 
      */
     def move(location:Location):GameState = 
         ???
