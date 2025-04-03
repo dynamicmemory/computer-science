@@ -161,7 +161,34 @@ count_accounts := (COUNT(anum) AS account_counts (customer_account) GROUP BY css
 final := (customer JOIN ssn=cssn count_accounts)[name, account_counts]
 
 
-4.
+4. Use a UNION to display customer accounts and loans in one table. This should 
+display customer name in the first column, balances and ammounts in the next column
+and account number or loan number in the last column
+
+accounts := (customer_account JOIN cssn = ssn customer)[name, balance, ano AS acc_loan_combo] 
+loans := (customer_loan JOIN cssn = ssn customer)[name, amount, lno AS acc_loan_combo]
+final := accounts UNION loans
 
 
+5. Display customers with all account NOT in armidale branch 
 
+armidale_accounts := (bank_branch WHERE b_address = 'Armidale') JOIN bno = bnum account
+armidale_customers := armidale_accounts JOIN anum = ano customer_account  
+non_armidale_customers := account JOIN anum = ano customer_account
+final := ((armidale_customers MINUS non_armidale_customers) JOIN cssn = ssn customer)[name]
+
+
+6. Get customers whos loan types are all general 
+
+all_loans := customer_loan JOIN cssn = ssn customer 
+non_general_loans := ((loan WHERE ltype != 'general') JOIN lnum = lno customer_loans) JOIN cssn = ssn customer
+final := (all_loans MINUS non_general_loans)[name]
+
+
+7. Return a sole customer with general loan types and if another customer with loan
+type general exists return no result 
+
+general_loans := ((loan WHERE ltype = 'general') JOIN lnum = lno customer_loan) JOIN cssn = ssn customer 
+final := general_loans DIVIDEDBY general_loans 
+
+Im not sure thats right....
