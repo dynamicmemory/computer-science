@@ -1,3 +1,18 @@
+Se1lect operation is similar to WHERE 
+Table_name WHERE attribute = value 
+
+Project operation is similar to SELECT 
+Table_name[attribute, attribute2, attribute3]
+
+Assigning and Renaming
+TEMP := Table_name WHERE attribute = value 
+R(att1,att2,att3) := TEMP[att1, att2, att3] 
+
+
+
+
+
+
 Example - get snn's for all employees that work in department 5 or any mananger
 that supervisdes an employee from department 5.
 
@@ -123,6 +138,30 @@ final := (gen_loan_customer WHERE count_of_gens[count] = 1)[ssn,fname,lname]
 
 
 
+1. Display customers with a student account in armidale branch 
+
+armidale_branch := bank_branch WHERE b_address = 'Armidal'
+armidale_student_accounts := armidale_branch JOIN bno=bnum account 
+student_accounts := armidale_student_accounts WHERE atype = 'Student'
+customer_account_numbers := student_accounts JOIN anumber=ano customer_account 
+final := (customer JOIN ssn=cssn customer_account_numbers)[ssn,name]
+
+
+2. Lets display average, total and count of balances per branch 
+
+bank_branch_accounts := bank_branch JOIN (bno,bco)=(bnum,bcum) account 
+bank_branch_balances := bank_branch_accounts JOIN ano=anum customer_account 
+final := (bank_branch_balance)[COUNT(balance), SUM(balance), AVG(balance)]
+
+
+3. List the number of accounts and names of customers who have more than one 
+   bank account 
+
+count_accounts := (COUNT(anum) AS account_counts (customer_account) GROUP BY cssn) >= 2
+final := (customer JOIN ssn=cssn count_accounts)[name, account_counts]
+
+
+4.
 
 
 
