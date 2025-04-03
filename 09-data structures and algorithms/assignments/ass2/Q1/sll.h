@@ -52,7 +52,8 @@ void Linked_List<T>::insert(Node<T>* p)
 template<class T>
 void Linked_List<T>::remove_from_head()
 {
-	Node<T>* p = head;
+	
+    Node<T>* p = head;
 	head = head->next;
 	delete p;
 }
@@ -70,10 +71,12 @@ bool Linked_List<T>::search(T k)
 template<class T>
 void Linked_List<T>::remove(T k)
 {
-	// List assumed not empty
+	// No need to assume an empty list. 
+    if (!head) 
+        return;
 	// If k is in head
 	if (head->key == k) 
-		remove_from_head();
+        remove_from_head();
 	else {
 		// k is not in head
 		Node<T>* pred = head;
