@@ -86,7 +86,6 @@ extension (l:Location) {
     def toChessLocation:String = 
         val (x, y) = l
         "" + "abcdefgh"(x) + (8 - y)
-
 }
 
 
@@ -108,23 +107,25 @@ extension (board:Board) {
       * If player p placed a piece in location l, what are the locations it would
       flip? You need to implement this.
       * 
-      * Hint: For each direction, get the locations that walk in that direction 
-        while it contains pieces (starting one step in that direction)
+      * Hint: For each direction, get the locations that walk in that direction while it contains pieces (starting one step in that direction)
       *       if there aren't any of your pieces, you can't capture anything 
               (you've got nothing on the other side)
       *       if there is one of your pieces on that line, take all the pieces 
               up to your first piece on the line
       */
-    def playingHereFlips(l:Location, p:Player):Seq[Location] = 
-      Direction.values.foreach(dir => l+(dir)  
+    // I did not find 'walkToEdge' useful here? Only confused me trying to incorporate it :) 
+    def playingHereFlips(l:Location, p:Player):Seq[Location] =  
 
+      @tailrec
+      def imWalkingHere(dir: Direction, l: Location, flips: Seq[Location]): Seq[Location] =
+        val takinAStep = l+(dir)
 
-        l+(Direction.values.foreach(dir => walkToEdge(l, dir).foreach(square => if board())
-        for { 
-          dir <- Direction.values
-          square <- walkToEdge(l, dir)
-          if (
-        }
+        board.get(takinAStep) match 
+          case Some(player) if (player != p) => imWalkingHere(dir, takinAStep, flips :+ takinAStep)
+          case Some(p) if flips.nonEmpty => flips
+          case _ => Seq()
+ 
+      Direction.values.toSeq.flatMap(dir => imWalkingHere(dir, l, Seq()))
 
     // Whether it'd be valid for player p to play in location l (assuming it's their turn). 
     // You need to implement this.
@@ -132,12 +133,17 @@ extension (board:Board) {
     // if it is in one of the centre squares that is not already occupied
     // Hint: Otherwise, it's a valid move if it is empty and flips more than 0 pieces.
     def isValidMove(l:Location, p:Player):Boolean = 
-       ??? 
-
+      ((!board.contains(l) && l.isInCentre) || (!board.contains(l) && playingHereFlips(l,p).size > 0))
+      
     // All the moves that are valid from this position for player p. You need to implement this.
     // Hint: Get a list of every location from (0, 0) to (7, 7) and filter it for the ones that are valid
     def allValidMoves(p:Player):Seq[Location] = 
-        ???
+      for { 
+        x <- 0 to 7
+        y <- 0 to 7
+        if (isValidMove((x,y), p))
+      }
+      yield(x,y)                          /// This might be broken, cant test
 
     /** 
      * Returns a board where player p has placed a piece in location l. You need to implement this. 
@@ -145,7 +151,9 @@ extension (board:Board) {
      as well as placing this piece
      */
     def boardAfterMove(l:Location, p:Player):Board = 
-        ??? 
+      val flips = playingHereFlips(l, p)
+      
+      board.map((x, y) => if (flips.contains(x)) (x, p) else (x, y)) ++ Map(l -> p)
 
     /** 
      * Written for you, this will print out a Reversi board using ASCII characters. * for black, O for white, . for empty 
@@ -165,9 +173,9 @@ extension (board:Board) {
 }
 
 // my main for testing, take this out
-@main
-def main(): Unit = 
-  println(walkToEdge((3,2), Direction.North))
+// @main
+// def main(): Unit = 
+  // println(walkToEdge((3,2), Direction.North))
 
 
 
@@ -199,7 +207,7 @@ object Board {
 case class GameState(lastMove:Option[(Location, Player)], board:Board, turn:Option[Player]) {
 
     /** True if neither player can play a move. You need to implement this */
-    def gameOver:Boolean = ???
+    def gameOver:Boolean = ??? //lastMove._2 == turn && // allValidMoves(???) = 0
 
     /** Whether a particular move is valid. */
     def isValidMove(location:Location):Boolean = 
@@ -223,9 +231,11 @@ case class GameState(lastMove:Option[(Location, Player)], board:Board, turn:Opti
        for the number of valid moves. If it's zero, 
      */
     def move(location:Location):GameState = 
-        ???
-        
-        
+      val playerWhoseTurn = if (board.last._2 == Player.Black) Player.Black else Player.White
+      val moveJustMade = location  
+      val updatedBoard = board.boardAfterMove(moveJustMade, playerWhoseTurn)
+      val nextPlayersTurn = if (playerWhoseTurn == Player.Black) Player.White else Player.Black
+      GameState(Option(moveJustMade, playerWhoseTurn), updatedBoard, Option(nextPlayersTurn))
 
 }
 
@@ -241,5 +251,9 @@ def newGame:Seq[GameState] = Seq(GameState.newGame)
 
 /** Called by the UI to make your AI play the game. You need to implement this. */
 def chooseMove(state:Seq[GameState]):Location = 
-    ???
+  move(allValidMoves(state.last._1)
+  // all valid moves
+  // playing flips here 
+  // greatest number of flips is the move 
+
     
