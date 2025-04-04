@@ -91,9 +91,13 @@ void remove(list<Passenger>& flist, std::string fname, std::string lname) {
 
 bool check_reservation(list<Passenger>& flist, std::string fname, std::string lname) {
 	list<Passenger>::iterator i1, i2;
+
+    // Create a passenger object from passed in values 
     Passenger p(fname, lname);
 	i1 = flist.begin();
 	i2 = flist.end();
+
+    // Search through the flight list looking for a match with our created passenger object
 	return (find(i1, i2, p) != i2);
 }
 

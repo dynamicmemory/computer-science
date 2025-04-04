@@ -1,6 +1,6 @@
 /* Array-based double linked-list class (no explicit pointers) */
 #include <exception>
-#include <iostream> // Probably remove this and find a better solution
+#include <iostream> 
 #include <stdexcept>
 // Node Array class (length 10) replaces Node class 
 template<class T>
@@ -73,8 +73,9 @@ void Array_Linked_List<T>::remove(Node_Array<T>& NA, int p)
 
 template<class T>
 int Array_Linked_List<T>::search(Node_Array<T>& NA, T k) {
-
-    for (int p = 0; p < NA.free; p++)
+    // start from the head and move to the next node until we hit null 
+    for (int p = head; p != -1; p = NA.next[p])
+        // return the indedx of a node if its key matches the target
         if (NA.key[p] == k){
             return p;
         }
@@ -97,14 +98,8 @@ void Array_Linked_List<T>::remove(Node_Array<T>& NA, T k) {
 
 template<class T>
 void Array_Linked_List<T>::print_list(Node_Array<T>& NA) {
-
-    for (int p = head; NA.next[p] >= 0; p--) {
-        if (NA.prev[p] < 0)
-            std::cout << NA.key[head] << " ";
-
-        // Only print elements that havent been removed
-        if (NA.next[p] == p-1) 
-            std::cout << NA.key[NA.next[p]] << " ";
-
-    }       
+    // Start from the head and print each key until we hit a null index.
+    for (int p = head; p != -1;  p = NA.next[p]) {
+        std::cout << NA.key[p] << " ";
+    }
 }
