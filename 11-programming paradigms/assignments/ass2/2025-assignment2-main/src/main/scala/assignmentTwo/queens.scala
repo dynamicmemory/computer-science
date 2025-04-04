@@ -140,7 +140,8 @@ extension (map:PossibilityMap) {
         for (loc, contents) <- map.toSeq if contents.contains(Contents.Queen) yield loc
 
 
-    /** Sets a square to be a Queen, also marking its neighbours and other squares in the colour, row, and colum to be Blank */
+    /** Sets a square to be a Queen, also marking its neighbours and other squares 
+     in the colour, row, and colum to be Blank */
     def setQueen(grid:Grid, loc:Location):PossibilityMap = 
         // If this square is a Queen, these can't be
         val thereforBlank:Seq[Location] =
@@ -156,46 +157,59 @@ extension (map:PossibilityMap) {
 
         map ++ thereforBlank.map(_ -> Set(Contents.Blank)) + (loc -> Set(Contents.Queen))
 
-    /** Sets a square to be a Blank. Takes the grid as input for consistency of API with setQueen */
+    /** Sets a square to be a Blank. Takes the grid as input for consistency of 
+     API with setQueen */
     def setBlank(grid:Grid, loc:Location):PossibilityMap = 
         map + (loc -> Set(Contents.Blank))
 
     /** Returns true if there are two definite Queens in this map that are touching */
     def hasTwoQueensTouching(grid:Grid):Boolean = 
-        grid.allSquares.exists((l) => map(l) == Set(Contents.Queen) && grid.neighbours(l).exists((ll) => map(ll) == Set(Contents.Queen)))
+        grid.allSquares.exists((l) => map(l) == Set(Contents.Queen) && 
+          grid.neighbours(l).exists((ll) => map(ll) == Set(Contents.Queen)))
 
-    /** Implement this. Returns true if a row in this map definitely breaks a rule. i.e. it has 2 definite queens or is all definite blanks */
+    /** Implement this. Returns true if a row in this map definitely breaks a rule. 
+     i.e. it has 2 definite queens or is all definite blanks */
     def rowFails(grid:Grid):Boolean = 
         ???
 
-    /** Implement this. Returns true if a colum in this map definitely breaks a rule. i.e. it has 2 definite queens or is all definite blanks */
+    /** Implement this. Returns true if a colum in this map definitely breaks a rule. 
+     i.e. it has 2 definite queens or is all definite blanks */
     def columnFails(grid:Grid):Boolean = 
         ???
 
-    /** Implement this. Returns true if a colour in this map definitely breaks a rule. i.e. it has 2 definite queens or is all definite blanks */        
+    /** Implement this. Returns true if a colour in this map definitely breaks a rule. 
+     i.e. it has 2 definite queens or is all definite blanks */        
     def colourFails(grid:Grid):Boolean = 
         ???
 
-    /** For the last task in the assignment. You can add another logical rule that can invalidate a grid if it's impossible - 
+    /** For the last task in the assignment. You can add another logical rule that 
+     can invalidate a grid if it's impossible - 
      *  e.g. that if 2 colours only have the same 1 column free, it's invalid */
     def extraRuleFails(grid:Grid):Boolean = 
         false
 
-    // Returns true if this set of possibilities breaks a rule -- e.g. doesn't have queens in a row, column, or colour, has two queens touching,
+    // Returns true if this set of possibilities breaks a rule -- e.g. doesn't have 
+    // queens in a row, column, or colour, has two queens touching,
     // or definitely has two queens in a row, column, or colour    
     def invalidFor(grid:Grid):Boolean = 
-        hasTwoQueensTouching(grid) || rowFails(grid) || columnFails(grid) || colourFails(grid) || extraRuleFails(grid)
+        hasTwoQueensTouching(grid) || rowFails(grid) || columnFails(grid) || 
+          colourFails(grid) || extraRuleFails(grid)
      
 
     // You need to implement this. Make some progress in solving the grid
     // You should look for:
     // 
-    // * a square where setting it to a blank would make the new board invalid (in which case it must be a queen)
-    // * a square where setting it to a queen would make the new board invalid (in which case it must be a blank), or
+    // * a square where setting it to a blank would make the new board invalid 
+    // (in which case it must be a queen)
+    // * a square where setting it to a queen would make the new board invalid 
+    // (in which case it must be a blank), or
     //
-    // There is one grid that this technique won't solve. You'll need to add another logical rule for if the first two didn't find anything
-    // e.g. if there are now two colours that can only have queens in the same two columns, no other colour could have a queen in those columns
-    // I created a function "extraRuleFails" where you could implement your rule; or you could do it directly here.
+    // There is one grid that this technique won't solve. You'll need to add 
+    // another logical rule for if the first two didn't find anything
+    // e.g. if there are now two colours that can only have queens in the same 
+    // two columns, no other colour could have a queen in those columns
+    // I created a function "extraRuleFails" where you could implement your rule; 
+    // or you could do it directly here.
     def makeAstep(grid:Grid):PossibilityMap =
         ???
 
