@@ -95,7 +95,7 @@ CREATE VIEW retail_price_hike(movie_id , retail_price, new_price)
 --     the cost and retail values across all shipments for each movie. The results 
 --     should be grouped by movie_title. (10 Mark)
 CREATE VIEW profits_from_movie(movie_id, movie_title, total_profit)
-  AS SELECT ship.movie_id, m.movie_title, ((SUM(s.retail_price) - SUM(s.cost_price)) * COUNT(s.movie_id))
+  AS SELECT ship.movie_id, m.movie_title, ((SUM(s.retail_price) - SUM(s.cost_price)) * COUNT(ship.movie_id))
     FROM movies AS m, stock AS s, shipments AS ship 
       GROUP BY ship.movie_id, m.movie_title;
 
