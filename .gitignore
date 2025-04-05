@@ -1,4 +1,5 @@
 *.mp4
+
 *.mkv
 textbooks/
 notes/
@@ -24,5 +25,5 @@ notes/
 25-s*
 26-d*
 
-*ass2/2025-assignment2-main*.js
+*Two.ui.main.js
 *ass2/2025-assignment2-main*.map
