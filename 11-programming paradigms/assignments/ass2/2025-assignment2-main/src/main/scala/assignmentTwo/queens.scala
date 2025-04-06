@@ -1,7 +1,5 @@
 package assignmentTwo.queens
 
-
-
 // The colours we can play with
 enum Colour(val letter:Char):
     case Red extends Colour('r')
@@ -41,7 +39,6 @@ extension (l:Location) {
     def +(dir:Direction):Location = 
         val (x, y) = l
         (x + dir.dx, y + dir.dy)
-
 }
 
 // Squares can contain a queen or a blank
@@ -130,7 +127,6 @@ object Grid {
         } 
 }
 
-
 /** Some methods on possibility maps */
 extension (map:PossibilityMap) {
 
@@ -141,7 +137,6 @@ extension (map:PossibilityMap) {
     // All locations that could contain a queen, from what we know so far
     def queenLocations:Seq[Location] = 
         for (loc, contents) <- map.toSeq if contents.contains(Contents.Queen) yield loc
-
 
     /** Sets a square to be a Queen, also marking its neighbours and other squares 
      in the colour, row, and colum to be Blank */
@@ -174,21 +169,25 @@ extension (map:PossibilityMap) {
      i.e. it has 2 definite queens or is all definite blanks */
     def rowFails(grid:Grid):Boolean = 
       
+      // Getting the count of queens in a given row of the board 
       val queens = grid.indices.map(x => grid.row(x).count(q => map(q) == Set(Contents.Queen)))
+      // returning true if all squares in a row are blank 
       val blanks = grid.indices.map(x => grid.row(x).forall(b => map(b) == Set(Contents.Blank)))
       
-      queens.exists(rows => rows > 1) || blanks.exists(rows => rows) 
+      // checking if queens are greater then 1 or all squares are blank
+      queens.exists(rows => rows > 1) || blanks.exists(rows => rows)  
 
     def columnFails(grid:Grid):Boolean = 
+
       val queens = grid.indices.map(x => grid.column(x).count(q => map(q) == Set(Contents.Queen)))
       val blanks = grid.indices.map(x => grid.column(x).forall(b => map(b) == Set(Contents.Blank)))
       
       queens.exists(cols => cols > 1) || blanks.exists(cols => cols) 
 
-
     /** Implement this. Returns true if a colour in this map definitely breaks a rule. 
      i.e. it has 2 definite queens or is all definite blanks */        
     def colourFails(grid:Grid):Boolean = 
+
       val queens = grid.colours.map(x => grid.squares(x).count(q => map(q) == Set(Contents.Queen)))
       val blanks = grid.colours.map(x => grid.squares(x).forall(b => map(b) == Set(Contents.Blank)))
       
@@ -198,7 +197,7 @@ extension (map:PossibilityMap) {
      can invalidate a grid if it's impossible - 
      *  e.g. that if 2 colours only have the same 1 column free, it's invalid */
     def extraRuleFails(grid:Grid):Boolean = 
-        false
+      false
 
     // Returns true if this set of possibilities breaks a rule -- e.g. doesn't have 
     // queens in a row, column, or colour, has two queens touching,
@@ -222,59 +221,58 @@ extension (map:PossibilityMap) {
     // two columns, no other colour could have a queen in those columns
     // I created a function "extraRuleFails" where you could implement your rule; 
     // or you could do it directly here.
-
-
+    
+    // My solution is slow, it takes like 5 to 10 seconds to compile...
     def makeAstep(grid: Grid): PossibilityMap =
-      // Try each square. If setting it to Blank makes the board invalid, it must be a Queen.
-      // If setting it to Queen makes the board invalid, it must be a Blank.
+      val snapShot = map
+
+      val updated = grid.allSquares.foldLeft(map) { (currentPossibilitiesMap, square) =>
+        currentPossibilitiesMap.get(square) match {
+          // If the squares content is undefined yet
+          case Some(possibilities) if possibilities == Set(Contents.Queen, Contents.Blank) =>
+            val queensMap = currentPossibilitiesMap.setQueen(grid, square)
+            val blanksMap = currentPossibilitiesMap.setBlank(grid, square)
+
+            if (queensMap.invalidFor(grid))     
+              currentPossibilitiesMap.setBlank(grid, square)
     
-      map.foldLeft(map) { case (currentMap, (loc, possibilities)) =>
-        if (possibilities == Set(Contents.Queen, Contents.Blank)) {
-          val mapIfBlank = currentMap.setBlank(grid, loc)
-          val mapIfQueen = currentMap.setQueen(grid, loc)
-    
-          if (mapIfBlank.invalidFor(grid)) {
-            // Blank makes the board invalid => must be a Queen
-            currentMap.setQueen(grid, loc)
-          } else if (mapIfQueen.invalidFor(grid)) {
-            // Queen makes the board invalid => must be a Blank
-            currentMap.setBlank(grid, loc)
-          } else {
-            // Neither is provably wrong yet; leave it unchanged
-            currentMap
-          }
-        } else {
-          // Already narrowed down to one option; leave it as is
-          currentMap
+            else if (blanksMap.invalidFor(grid))
+              currentPossibilitiesMap.setQueen(grid, square)
+
+            // Neither were successful so leave the square alone for now, THIS CHECK IS KEY!!!
+            else 
+              currentPossibilitiesMap
+
+          // If we've already solved the squares content
+          case _ => currentPossibilitiesMap
         }
       }
+      // Check if anything was solved, use the extraRule if not
+      if (updated == snapShot) {
+        // Brute Force: Try placing a queen on an unsolved square and see if it leads to a solution
+        val unsolvedSquares = grid.allSquares.filter(square => 
+            updated.get(square).exists(_.contains(Contents.Queen)))
 
+        var finalMap = updated // Initialize the map for the brute-force loop
 
+        // Try each unsolved square to see if placing a Queen helps
+        var placed = false
+        for (square <- unsolvedSquares if !placed) {
+          val queenMap = finalMap.setQueen(grid, square)
 
+          // If placing a Queen here leads to a valid solution
+          if (!queenMap.invalidFor(grid)) {
+            finalMap = queenMap // Update the final map
+            placed = true // Mark that we've successfully placed a Queen
+          }
+        }
 
-
-
-
-
-    // def makeAstep(grid:Grid):PossibilityMap =
-    //
-    //   def thisRecursiveQueen(rowNum: Integer, possibilities: PossibilityMap): PossibilityMap =
-    //
-    //     if (solved)
-    //       possibilities
-    //     else
-    //
-    //       for (square <- grid.row(rowNum)) {
-    //         setQueen(grid, square)
-    //         if (invalidFor(grid))
-    //           setBlank(grid, square)
-    //           possibilities + (square -> Set(Contents.Blank))
-    //         else
-    //           possibilities + (square -> Set(Contents.Queen))
-    //       }
-    //       thisRecursiveQueen(rowNum +1, possibilities)
-    //
-    //   thisRecursiveQueen(0, PossibilityMap)
+        // Return the updated map after brute-force attempt
+        finalMap
+      }
+      else 
+        updated // Normal rules worked  
+      
 }
 
 val puzzles = Map(
@@ -314,8 +312,27 @@ val puzzles = Map(
                                                 |rygggggg
                                                 |ryggdggd
                                                 |rrggdddd""".stripMargin),
-
 )
 
 
 
+      // map.foldLeft(map) { case (currentMap, (loc, possibilities)) =>
+      //   if (possibilities == Set(Contents.Queen, Contents.Blank)) {
+      //     val mapIfBlank = currentMap.setBlank(grid, loc)
+      //     val mapIfQueen = currentMap.setQueen(grid, loc)
+      //
+      //     if (mapIfBlank.invalidFor(grid)) {
+      //       // Blank makes the board invalid => must be a Queen
+      //       currentMap.setQueen(grid, loc)
+      //     } else if (mapIfQueen.invalidFor(grid)) {
+      //       // Queen makes the board invalid => must be a Blank
+      //       currentMap.setBlank(grid, loc)
+      //     } else {
+      //       // Neither is provably wrong yet; leave it unchanged
+      //       currentMap
+      //     }
+      //   } else {
+      //     // Already narrowed down to one option; leave it as is
+      //     currentMap
+      //   }
+      // }
