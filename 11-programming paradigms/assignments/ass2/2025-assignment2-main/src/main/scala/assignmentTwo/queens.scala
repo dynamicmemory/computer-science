@@ -249,26 +249,82 @@ extension (map:PossibilityMap) {
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
-        // Brute Force: Try placing a queen on an unsolved square and see if it leads to a solution
-        val unsolvedSquares = grid.allSquares.filter(square => 
-            updated.get(square).exists(_.contains(Contents.Queen)))
 
-        var finalMap = updated // Initialize the map for the brute-force loop
-
-        // Try each unsolved square to see if placing a Queen helps
-        var placed = false
-        for (square <- unsolvedSquares if !placed) {
-          val queenMap = finalMap.setQueen(grid, square)
-
-          // If placing a Queen here leads to a valid solution
-          if (!queenMap.invalidFor(grid)) {
-            finalMap = queenMap // Update the final map
-            placed = true // Mark that we've successfully placed a Queen
+        def eliminateLockedRegions(grid: Grid, map: PossibilityMap, getIndex: Location => Int): PossibilityMap = {
+          val allColours = grid.colours
+        
+          // Map each colour to the set of indices (rows or columns) it appears in
+          val colourToIndices = allColours.map(c => c -> grid.squares(c).map(getIndex).toSet).toMap
+        
+          // Try all subsets of colours of size >= 2
+          val colourSubsets = allColours.toSet.subsets.filter(_.size >= 2)
+        
+          colourSubsets.foldLeft(map) { (currentMap, colourSubset) =>
+            val indices = colourSubset.flatMap(colourToIndices).toSet
+        
+            if (indices.size == colourSubset.size) {
+              val otherColours = allColours -- colourSubset
+        
+              otherColours.foldLeft(currentMap) { (updatedMap, otherColour) =>
+                val affectedLocations = grid.squares(otherColour).filter(loc => indices.contains(getIndex(loc)))
+        
+                affectedLocations.foldLeft(updatedMap) {
+                  case (mapAcc, loc) if mapAcc.get(loc).contains(Set(Contents.Queen, Contents.Blank)) =>
+                    mapAcc.setBlank(grid, loc)
+                  case (mapAcc, _) => mapAcc
+                }
+              }
+            } 
+            else 
+              currentMap
           }
         }
 
-        // Return the updated map after brute-force attempt
-        finalMap
+
+
+//// THIS WORKS TOO
+        // def eliminateLockedRegions(grid: Grid, map: PossibilityMap, getIndex: Location => Int): PossibilityMap = {
+        //   val allColours = grid.colours
+        //
+        //   // Step 1: Map each colour to the set of rows (or cols) it appears in
+        //   val colourToIndices: Map[Colour, Set[Int]] = allColours.map { colour =>
+        //     val indices = grid.squares(colour).map(getIndex).toSet
+        //     colour -> indices
+        //   }.toMap
+        //
+        //   // Step 2: Try all subsets of colours of size >= 2
+        //   val colourSubsets = (2 to allColours.size).flatMap(allColours.subsets)
+        //
+        //   colourSubsets.foldLeft(map) { (currentMap, colourSubset) =>
+        //     val indices = colourSubset.flatMap(colourToIndices.getOrElse(_, Set.empty)).toSet
+        //
+        //     if (indices.size == colourSubset.size) {
+        //       // locked colours in locked rows/columns
+        //       val locked = colourSubset.toSet
+        //       val otherColours = allColours.diff(locked)
+        //
+        //       // Step 3: eliminate any other colours that also appear in those rows/columns
+        //       otherColours.foldLeft(currentMap) { (updatedMap, otherColour) =>
+        //         val locations = grid.squares(otherColour).filter(loc => indices.contains(getIndex(loc)))
+        //         locations.foldLeft(updatedMap) { (mapAcc, loc) =>
+        //           if (mapAcc.get(loc).contains(Set(Contents.Queen, Contents.Blank)))
+        //             mapAcc.setBlank(grid, loc)
+        //           else mapAcc
+        //         }
+        //       }
+        //     } else currentMap
+        //   }
+        // }
+        
+        val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
+        val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
+        
+        withColElimination
+
+        // val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
+        // val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
+        // withColElimination
+
       }
       else 
         updated // Normal rules worked  
@@ -313,6 +369,31 @@ val puzzles = Map(
                                                 |ryggdggd
                                                 |rrggdddd""".stripMargin),
 )
+
+        // Brute Force: Try placing a queen on an unsolved square and see if it leads to a solution
+        // val unsolvedSquares = grid.allSquares.filter(square => 
+        //     updated.get(square).exists(_.contains(Contents.Queen)))
+        //
+        // var finalMap = updated // Initialize the map for the brute-force loop
+        //
+        // // Try each unsolved square to see if placing a Queen helps
+        // var placed = false
+        // for (square <- unsolvedSquares if !placed) {
+        //   val queenMap = finalMap.setQueen(grid, square)
+        //
+        //   // If placing a Queen here leads to a valid solution
+        //   if (!queenMap.invalidFor(grid)) {
+        //     finalMap = queenMap // Update the final map
+        //     placed = true // Mark that we've successfully placed a Queen
+        //   }
+        // }
+        //
+        // // Return the updated map after brute-force attempt
+        // finalMap
+
+
+
+
 
 
 
