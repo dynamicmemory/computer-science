@@ -46,6 +46,9 @@ enum Contents:
     case Queen
     case Blank
 
+// A function that contains both potential options a square could contain
+def hasBoth: Set[Contents] = Set(Contents.Queen, Contents.Blank)
+
 // A row of coloured squares
 type Row = Seq[Colour]
 
@@ -222,14 +225,13 @@ extension (map:PossibilityMap) {
     // I created a function "extraRuleFails" where you could implement your rule; 
     // or you could do it directly here.
     
-    // My solution is slow, it takes like 5 to 10 seconds to compile...
     def makeAstep(grid: Grid): PossibilityMap =
       val snapShot = map
 
       val updated = grid.allSquares.foldLeft(map) { (currentPossibilitiesMap, square) =>
         currentPossibilitiesMap.get(square) match {
           // If the squares content is undefined yet
-          case Some(possibilities) if possibilities == Set(Contents.Queen, Contents.Blank) =>
+          case Some(possibilities) if possibilities == hasBoth =>
             val queensMap = currentPossibilitiesMap.setQueen(grid, square)
             val blanksMap = currentPossibilitiesMap.setBlank(grid, square)
 
@@ -249,82 +251,52 @@ extension (map:PossibilityMap) {
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
+         
+        def allColours = grid.colours 
+        def colourGroups = allColours.subsets.filter(_.size >= 2)
 
-        def eliminateLockedRegions(grid: Grid, map: PossibilityMap, getIndex: Location => Int): PossibilityMap = {
-          val allColours = grid.colours
-        
-          // Map each colour to the set of indices (rows or columns) it appears in
-          val colourToIndices = allColours.map(c => c -> grid.squares(c).map(getIndex)).toMap
-        
-          // Try all subsets of colours of size >= 2
-          val colourSubsets = allColours.toSet.subsets.filter(_.size >= 2)
-        
-          colourSubsets.foldLeft(map) { (currentMap, colourSubset) =>
-            val indices = colourSubset.flatMap(colourToIndices).toSet
-        
-            if (indices.size == colourSubset.size) {
-              val otherColours = allColours -- colourSubset
-        
+
+        // Find each instance where there are more colours in rows or cols then 
+        // the number of rows or cols that those colours are spread over. If there 
+        // is a colour that exists outside those rows or cols, eliminate it within 
+        // those rows and cols by setting that colours squares inside those rows 
+        // and cols blank.... *inhales deeply* 
+        def myExtraRule(map: PossibilityMap, getIndex: Location => Int) = 
+          // val allColours = grid.colours
+
+          // Create a map of every colour and the rows or cols it exists in. 
+          val colourPositions = allColours.map(c => c -> grid.squares(c).map(getIndex)).toMap
+          // Get all of the colour combos from the grid that have atleast 2 colours
+          // val colourGroups = allColours.subsets.filter(_.size >= 2)
+
+          // For each colourGroup we combined all the cols or rows they spread over 
+          colourGroups.foldLeft(map) { (currentMap, colourGroup) =>
+            val gridIndicies = colourGroup.flatMap(colourPositions)
+
+            // Check if the number of rows or cols they spread over == the no of colours 
+            if (gridIndicies.size == colourGroup.size) 
+              // take only the colours not included in our colourgroup
+              val otherColours = allColours -- colourGroup
+
+              // Get the locations of the squares that arnt in our colourGroup and 
+              // filter for only the rows and cols that our colourGroup exist in 
               otherColours.foldLeft(currentMap) { (updatedMap, otherColour) =>
-                val affectedLocations = grid.squares(otherColour).filter(loc => indices.contains(getIndex(loc)))
-        
-                affectedLocations.foldLeft(updatedMap) {
-                  case (mapAcc, loc) if mapAcc.get(loc).contains(Set(Contents.Queen, Contents.Blank)) =>
-                    mapAcc.setBlank(grid, loc)
+                val matchLocations = grid.squares(otherColour).filter(loc => 
+                    gridIndicies.contains(getIndex(loc)))
+
+                // Now we just set the squares at those locations to blank if they
+                // they still contain both possibilities. 
+                matchLocations.foldLeft(updatedMap) {
+                  case (mapAcc, loc) if mapAcc.get(loc).contains(hasBoth) => mapAcc.setBlank(grid, loc)
                   case (mapAcc, _) => mapAcc
                 }
               }
-            } 
             else 
-              currentMap
+              currentMap      // colourGroups didnt match number of rows or cols 
           }
-        }
-        val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
-        val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
-        
-        withColElimination
-
-
-//// THIS WORKS TOO
-        // def eliminateLockedRegions(grid: Grid, map: PossibilityMap, getIndex: Location => Int): PossibilityMap = {
-        //   val allColours = grid.colours
-        //
-        //   // Step 1: Map each colour to the set of rows (or cols) it appears in
-        //   val colourToIndices: Map[Colour, Set[Int]] = allColours.map { colour =>
-        //     val indices = grid.squares(colour).map(getIndex).toSet
-        //     colour -> indices
-        //   }.toMap
-        //
-        //   // Step 2: Try all subsets of colours of size >= 2
-        //   val colourSubsets = (2 to allColours.size).flatMap(allColours.subsets)
-        //
-        //   colourSubsets.foldLeft(map) { (currentMap, colourSubset) =>
-        //     val indices = colourSubset.flatMap(colourToIndices.getOrElse(_, Set.empty)).toSet
-        //
-        //     if (indices.size == colourSubset.size) {
-        //       // locked colours in locked rows/columns
-        //       val locked = colourSubset.toSet
-        //       val otherColours = allColours.diff(locked)
-        //
-        //       // Step 3: eliminate any other colours that also appear in those rows/columns
-        //       otherColours.foldLeft(currentMap) { (updatedMap, otherColour) =>
-        //         val locations = grid.squares(otherColour).filter(loc => indices.contains(getIndex(loc)))
-        //         locations.foldLeft(updatedMap) { (mapAcc, loc) =>
-        //           if (mapAcc.get(loc).contains(Set(Contents.Queen, Contents.Blank)))
-        //             mapAcc.setBlank(grid, loc)
-        //           else mapAcc
-        //         }
-        //       }
-        //     } else currentMap
-        //   }
-        // }
-        
-        
-
-        // val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
-        // val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
-        // withColElimination
-
+        // Pass the rows resulted map into the columns call to the extra rule 
+        myExtraRule(myExtraRule(updated, _._2), _._1)
+         
       }
       else 
         updated // Normal rules worked  
@@ -370,50 +342,4 @@ val puzzles = Map(
                                                 |rrggdddd""".stripMargin),
 )
 
-        // Brute Force: Try placing a queen on an unsolved square and see if it leads to a solution
-        // val unsolvedSquares = grid.allSquares.filter(square => 
-        //     updated.get(square).exists(_.contains(Contents.Queen)))
-        //
-        // var finalMap = updated // Initialize the map for the brute-force loop
-        //
-        // // Try each unsolved square to see if placing a Queen helps
-        // var placed = false
-        // for (square <- unsolvedSquares if !placed) {
-        //   val queenMap = finalMap.setQueen(grid, square)
-        //
-        //   // If placing a Queen here leads to a valid solution
-        //   if (!queenMap.invalidFor(grid)) {
-        //     finalMap = queenMap // Update the final map
-        //     placed = true // Mark that we've successfully placed a Queen
-        //   }
-        // }
-        //
-        // // Return the updated map after brute-force attempt
-        // finalMap
 
-
-
-
-
-
-
-      // map.foldLeft(map) { case (currentMap, (loc, possibilities)) =>
-      //   if (possibilities == Set(Contents.Queen, Contents.Blank)) {
-      //     val mapIfBlank = currentMap.setBlank(grid, loc)
-      //     val mapIfQueen = currentMap.setQueen(grid, loc)
-      //
-      //     if (mapIfBlank.invalidFor(grid)) {
-      //       // Blank makes the board invalid => must be a Queen
-      //       currentMap.setQueen(grid, loc)
-      //     } else if (mapIfQueen.invalidFor(grid)) {
-      //       // Queen makes the board invalid => must be a Blank
-      //       currentMap.setBlank(grid, loc)
-      //     } else {
-      //       // Neither is provably wrong yet; leave it unchanged
-      //       currentMap
-      //     }
-      //   } else {
-      //     // Already narrowed down to one option; leave it as is
-      //     currentMap
-      //   }
-      // }
