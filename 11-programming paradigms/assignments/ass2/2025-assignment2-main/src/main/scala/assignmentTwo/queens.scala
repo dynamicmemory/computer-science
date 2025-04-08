@@ -254,7 +254,7 @@ extension (map:PossibilityMap) {
           val allColours = grid.colours
         
           // Map each colour to the set of indices (rows or columns) it appears in
-          val colourToIndices = allColours.map(c => c -> grid.squares(c).map(getIndex).toSet).toMap
+          val colourToIndices = allColours.map(c => c -> grid.squares(c).map(getIndex)).toMap
         
           // Try all subsets of colours of size >= 2
           val colourSubsets = allColours.toSet.subsets.filter(_.size >= 2)
@@ -279,7 +279,10 @@ extension (map:PossibilityMap) {
               currentMap
           }
         }
-
+        val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
+        val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
+        
+        withColElimination
 
 
 //// THIS WORKS TOO
@@ -316,10 +319,7 @@ extension (map:PossibilityMap) {
         //   }
         // }
         
-        val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
-        val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
         
-        withColElimination
 
         // val withRowElimination = eliminateLockedRegions(grid, updated, _._2)
         // val withColElimination = eliminateLockedRegions(grid, withRowElimination, _._1)
