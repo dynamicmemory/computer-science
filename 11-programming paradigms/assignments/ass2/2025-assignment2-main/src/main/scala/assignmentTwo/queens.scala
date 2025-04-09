@@ -200,7 +200,27 @@ extension (map:PossibilityMap) {
      can invalidate a grid if it's impossible - 
      *  e.g. that if 2 colours only have the same 1 column free, it's invalid */
     def extraRuleFails(grid:Grid):Boolean = 
-      false
+      
+      def checkForInvalids(getIndex: Location => Int): Boolean = 
+        
+        // Filter all the combos of colours for the grid for those contain 2 or more 
+        val colourGroups = grid.colours.subsets.filter(_.size > 2)
+
+        // Map the colours to their position in the grid 
+        val colourPositions: Map[Colour, Seq[Int]] = 
+          grid.colours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
+
+        // Check is there exists a colourgroup that is only in 1 column 
+        colourGroups.exists { colourGroup => 
+          val gridIndicies: Set[Int] = colourGroup.flatMap(colourPositions) 
+          gridIndicies.size == 1
+        }
+      
+      val checkRows = checkForInvalids(_._2)
+      val checkColumns = checkForInvalids(_._1)
+
+      checkRows || checkColumns
+      
 
     // Returns true if this set of possibilities breaks a rule -- e.g. doesn't have 
     // queens in a row, column, or colour, has two queens touching,
@@ -237,7 +257,7 @@ extension (map:PossibilityMap) {
 
             if (queensMap.invalidFor(grid))     
               currentPossibilitiesMap.setBlank(grid, square)
-    
+      
             else if (blanksMap.invalidFor(grid))
               currentPossibilitiesMap.setQueen(grid, square)
 
@@ -251,52 +271,53 @@ extension (map:PossibilityMap) {
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
-         
-        def allColours = grid.colours 
-        def colourGroups = allColours.subsets.filter(_.size >= 2)
+        
+        // Get all colours for the current grid 
+        def allColours: Set[Colour] = grid.colours 
 
+        // Get all possible colour combos for the grid, filter for two or more only 
+        def colourGroups: Iterator[Set[Colour]] = allColours.subsets.filter(_.size >= 2)
 
-        // Find each instance where there are more colours in rows or cols then 
-        // the number of rows or cols that those colours are spread over. If there 
-        // is a colour that exists outside those rows or cols, eliminate it within 
-        // those rows and cols by setting that colours squares inside those rows 
-        // and cols blank.... *inhales deeply* 
-        def myExtraRule(map: PossibilityMap, getIndex: Location => Int) = 
-          // val allColours = grid.colours
+        // Ill walk you through it (dante went through the 9 circles of hell, 
+        // you go through the 3 folds) Basically if there are x colours that 
+        // are only in x cols or rows, then any other colour in those rows or 
+        // cols cant be a queen, so we set them to blank. 
+        def myExtraRule(map: PossibilityMap, getIndex: Location => Int): PossibilityMap =
 
-          // Create a map of every colour and the rows or cols it exists in. 
-          val colourPositions = allColours.map(c => c -> grid.squares(c).map(getIndex)).toMap
-          // Get all of the colour combos from the grid that have atleast 2 colours
-          // val colourGroups = allColours.subsets.filter(_.size >= 2)
+          // Map: colour  -> grid number for each square depending on rows or columns being passed 
+          val colourPositions: Map[Colour, Seq[Int]] = 
+            allColours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
 
-          // For each colourGroup we combined all the cols or rows they spread over 
+          // Get the set of rows or columns that all the colours in a colour group fall on 
           colourGroups.foldLeft(map) { (currentMap, colourGroup) =>
-            val gridIndicies = colourGroup.flatMap(colourPositions)
+            val gridIndicies: Set[Int] = colourGroup.flatMap(colourPositions)
 
-            // Check if the number of rows or cols they spread over == the no of colours 
+            // if the number of columns or rows is equal to the number of colours in the group 
             if (gridIndicies.size == colourGroup.size) 
-              // take only the colours not included in our colourgroup
-              val otherColours = allColours -- colourGroup
+              // get a set of only the colours not in our current group colour 
+              val otherColours: Set[Colour] = allColours -- colourGroup
 
-              // Get the locations of the squares that arnt in our colourGroup and 
-              // filter for only the rows and cols that our colourGroup exist in 
+              // Get the locations of all the colours not in our group and filter 
+              // for only the columns or rows our colour group is in, (this is the magic)
               otherColours.foldLeft(currentMap) { (updatedMap, otherColour) =>
-                val matchLocations = grid.squares(otherColour).filter(loc => 
+                val matchLocations: Seq[Location] = grid.squares(otherColour).filter(loc => 
                     gridIndicies.contains(getIndex(loc)))
 
-                // Now we just set the squares at those locations to blank if they
-                // they still contain both possibilities. 
+                // If there is a square with a colour that cant be a queen in our 
+                // selected rows or cols, then set it to blank if it hasnt been 
+                // assigned a value yet, otherwise let it be.
                 matchLocations.foldLeft(updatedMap) {
-                  case (mapAcc, loc) if mapAcc.get(loc).contains(hasBoth) => mapAcc.setBlank(grid, loc)
-                  case (mapAcc, _) => mapAcc
+                  case (finalMap, loc) if finalMap.get(loc).contains(hasBoth) => finalMap.setBlank(grid, loc)
+                  case (finalMap, _) => finalMap
                 }
               }
             else 
               currentMap      // colourGroups didnt match number of rows or cols 
           }
-        // Pass the rows resulted map into the columns call to the extra rule 
-        myExtraRule(myExtraRule(updated, _._2), _._1)
-         
+        // Pass the rows map into the columns map to check for both indicies possibilities
+        val rowsMap = myExtraRule(updated, _._2)
+        myExtraRule(rowsMap, _._1) 
+           
       }
       else 
         updated // Normal rules worked  
@@ -341,5 +362,4 @@ val puzzles = Map(
                                                 |ryggdggd
                                                 |rrggdddd""".stripMargin),
 )
-
 
