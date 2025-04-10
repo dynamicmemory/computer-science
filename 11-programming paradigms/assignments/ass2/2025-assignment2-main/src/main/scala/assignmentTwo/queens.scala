@@ -47,7 +47,7 @@ enum Contents:
     case Blank
 
 // A function that contains both potential options a square could contain
-def hasBoth: Set[Contents] = Set(Contents.Queen, Contents.Blank)
+def hasBoth: Set[Contents] = Contents.values.toSet
 
 // A row of coloured squares
 type Row = Seq[Colour]
@@ -196,31 +196,26 @@ extension (map:PossibilityMap) {
       
       queens.exists(col => col > 1) || blanks.exists(col => col) 
 
-    /** For the last task in the assignment. You can add another logical rule that 
+
+ /** For the last task in the assignment. You can add another logical rule that 
      can invalidate a grid if it's impossible - 
      *  e.g. that if 2 colours only have the same 1 column free, it's invalid */
     def extraRuleFails(grid:Grid):Boolean = 
-      
+
       def checkForInvalids(getIndex: Location => Int): Boolean = 
-        
+
         // Filter all the combos of colours for the grid for those contain 2 or more 
-        val colourGroups = grid.colours.subsets.filter(_.size > 2)
+        val colourGroups = grid.colours.subsets.filter(_.size >= 2)
 
         // Map the colours to their position in the grid 
         val colourPositions: Map[Colour, Seq[Int]] = 
           grid.colours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
 
         // Check is there exists a colourgroup that is only in 1 column 
-        colourGroups.exists { colourGroup => 
-          val gridIndicies: Set[Int] = colourGroup.flatMap(colourPositions) 
-          gridIndicies.size == 1
-        }
-      
-      val checkRows = checkForInvalids(_._2)
-      val checkColumns = checkForInvalids(_._1)
+        colourGroups.exists(colourGroup => colourGroup.flatMap(colourPositions).toSet.size == 1)
 
-      checkRows || checkColumns
-      
+      checkForInvalids(_._2) || checkForInvalids(_._1)
+
 
     // Returns true if this set of possibilities breaks a rule -- e.g. doesn't have 
     // queens in a row, column, or colour, has two queens touching,
@@ -228,23 +223,7 @@ extension (map:PossibilityMap) {
     def invalidFor(grid:Grid):Boolean = 
         hasTwoQueensTouching(grid) || rowFails(grid) || columnFails(grid) || 
           colourFails(grid) || extraRuleFails(grid)
-     
 
-    // You need to implement this. Make some progress in solving the grid
-    // You should look for:
-    // 
-    // * a square where setting it to a blank would make the new board invalid 
-    // (in which case it must be a queen)
-    // * a square where setting it to a queen would make the new board invalid 
-    // (in which case it must be a blank), or
-    //
-    // There is one grid that this technique won't solve. You'll need to add 
-    // another logical rule for if the first two didn't find anything
-    // e.g. if there are now two colours that can only have queens in the same 
-    // two columns, no other colour could have a queen in those columns
-    // I created a function "extraRuleFails" where you could implement your rule; 
-    // or you could do it directly here.
-    
     def makeAstep(grid: Grid): PossibilityMap =
       val snapShot = map
 
@@ -257,7 +236,7 @@ extension (map:PossibilityMap) {
 
             if (queensMap.invalidFor(grid))     
               currentPossibilitiesMap.setBlank(grid, square)
-      
+
             else if (blanksMap.invalidFor(grid))
               currentPossibilitiesMap.setQueen(grid, square)
 
@@ -271,7 +250,7 @@ extension (map:PossibilityMap) {
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
-        
+
         // Get all colours for the current grid 
         def allColours: Set[Colour] = grid.colours 
 
@@ -317,11 +296,11 @@ extension (map:PossibilityMap) {
         // Pass the rows map into the columns map to check for both indicies possibilities
         val rowsMap = myExtraRule(updated, _._2)
         myExtraRule(rowsMap, _._1) 
-           
+
       }
       else 
         updated // Normal rules worked  
-      
+
 }
 
 val puzzles = Map(
