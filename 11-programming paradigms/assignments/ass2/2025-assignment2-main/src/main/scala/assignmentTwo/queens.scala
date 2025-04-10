@@ -46,9 +46,6 @@ enum Contents:
     case Queen
     case Blank
 
-// A function that contains both potential options a square could contain
-def hasBoth: Set[Contents] = Contents.values.toSet
-
 // A row of coloured squares
 type Row = Seq[Colour]
 
@@ -106,8 +103,6 @@ extension (grid:Grid) {
             y <- grid.indices
             x <- grid(y).indices
         yield (x, y) -> Contents.values.toSet).toMap
-        
-
 }
 
 object Grid {
@@ -134,8 +129,7 @@ object Grid {
 extension (map:PossibilityMap) {
 
     // A map is solved if we know whether every square is a Queen or a Blank
-    def solved:Boolean = 
-        map.forall((loc, contents) => contents.size == 1)
+    def solved:Boolean = map.forall((loc, contents) => contents.size == 1)
 
     // All locations that could contain a queen, from what we know so far
     def queenLocations:Seq[Location] = 
@@ -174,7 +168,8 @@ extension (map:PossibilityMap) {
       
       // Getting the count of queens in a given row of the board 
       val queens = grid.indices.map(x => grid.row(x).count(q => map(q) == Set(Contents.Queen)))
-      // returning true if all squares in a row are blank 
+      
+      // returns true if all squares in a row are blank 
       val blanks = grid.indices.map(x => grid.row(x).forall(b => map(b) == Set(Contents.Blank)))
       
       // checking if queens are greater then 1 or all squares are blank
@@ -196,6 +191,13 @@ extension (map:PossibilityMap) {
       
       queens.exists(col => col > 1) || blanks.exists(col => col) 
 
+    /* My helper functions */
+
+    // A function that contains both potential options a square could contain
+    def hasBoth: Set[Contents] = Contents.values.toSet
+
+    // Get all the combos of colours for the grid, filtering for 2 or more.
+    def colourGroups(grid: Grid): Iterator[Set[Colour]] = grid.colours.subsets.filter(_.size >= 2)
 
  /** For the last task in the assignment. You can add another logical rule that 
      can invalidate a grid if it's impossible - 
@@ -204,15 +206,12 @@ extension (map:PossibilityMap) {
 
       def checkForInvalids(getIndex: Location => Int): Boolean = 
 
-        // Filter all the combos of colours for the grid for those contain 2 or more 
-        val colourGroups = grid.colours.subsets.filter(_.size >= 2)
-
         // Map the colours to their position in the grid 
         val colourPositions: Map[Colour, Seq[Int]] = 
           grid.colours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
 
         // Check is there exists a colourgroup that is only in 1 column 
-        colourGroups.exists(colourGroup => colourGroup.flatMap(colourPositions).toSet.size == 1)
+        colourGroups(grid).exists(colourGroup => colourGroup.flatMap(colourPositions).toSet.size == 1)
 
       checkForInvalids(_._2) || checkForInvalids(_._1)
 
@@ -224,57 +223,53 @@ extension (map:PossibilityMap) {
         hasTwoQueensTouching(grid) || rowFails(grid) || columnFails(grid) || 
           colourFails(grid) || extraRuleFails(grid)
 
+
     def makeAstep(grid: Grid): PossibilityMap =
+      // val colourPositionsRow = grid.colours.map(c => c -> grid.squares(c).map(_._2)).toMap
+      // val colourPositionsCol = grid.colours.map(c => c -> grid.squares(c).map(_._1)).toMap
+
       val snapShot = map
 
-      val updated = grid.allSquares.foldLeft(map) { (currentPossibilitiesMap, square) =>
-        currentPossibilitiesMap.get(square) match {
+      val updated = grid.allSquares.foldLeft(map) { (currentMap, square) =>
+        currentMap.get(square) match 
+
           // If the squares content is undefined yet
           case Some(possibilities) if possibilities == hasBoth =>
-            val queensMap = currentPossibilitiesMap.setQueen(grid, square)
-            val blanksMap = currentPossibilitiesMap.setBlank(grid, square)
+            val queensMap = currentMap.setQueen(grid, square)
+            val blanksMap = currentMap.setBlank(grid, square)
 
             if (queensMap.invalidFor(grid))     
-              currentPossibilitiesMap.setBlank(grid, square)
+              currentMap.setBlank(grid, square)
 
             else if (blanksMap.invalidFor(grid))
-              currentPossibilitiesMap.setQueen(grid, square)
+              currentMap.setQueen(grid, square)
 
             // Neither were successful so leave the square alone for now, THIS CHECK IS KEY!!!
             else 
-              currentPossibilitiesMap
+              currentMap
 
-          // If we've already solved the squares content
-          case _ => currentPossibilitiesMap
-        }
+          case _ => currentMap
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
-
-        // Get all colours for the current grid 
-        def allColours: Set[Colour] = grid.colours 
-
-        // Get all possible colour combos for the grid, filter for two or more only 
-        def colourGroups: Iterator[Set[Colour]] = allColours.subsets.filter(_.size >= 2)
-
-        // Ill walk you through it (dante went through the 9 circles of hell, 
-        // you go through the 3 folds) Basically if there are x colours that 
-        // are only in x cols or rows, then any other colour in those rows or 
-        // cols cant be a queen, so we set them to blank. 
+     
+        // Get all the combos of colours for the grid, filtering for 2 or more.
+        def colourGroups(grid: Grid): Iterator[Set[Colour]] = grid.colours.subsets.filter(_.size >= 2)
+        
         def myExtraRule(map: PossibilityMap, getIndex: Location => Int): PossibilityMap =
 
           // Map: colour  -> grid number for each square depending on rows or columns being passed 
           val colourPositions: Map[Colour, Seq[Int]] = 
-            allColours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
+            grid.colours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
 
           // Get the set of rows or columns that all the colours in a colour group fall on 
-          colourGroups.foldLeft(map) { (currentMap, colourGroup) =>
+          colourGroups(grid).foldLeft(map) { (currentMap, colourGroup) =>
             val gridIndicies: Set[Int] = colourGroup.flatMap(colourPositions)
 
             // if the number of columns or rows is equal to the number of colours in the group 
             if (gridIndicies.size == colourGroup.size) 
               // get a set of only the colours not in our current group colour 
-              val otherColours: Set[Colour] = allColours -- colourGroup
+              val otherColours: Set[Colour] = grid.colours -- colourGroup
 
               // Get the locations of all the colours not in our group and filter 
               // for only the columns or rows our colour group is in, (this is the magic)
