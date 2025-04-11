@@ -84,3 +84,56 @@ CREATE TABLE works_on (
 --       (SELECT ssn
 --         FROM employee e2 
 --         WHERE e2.fname = 'Franklin' AND e2.lname = 'Wong');
+
+-- Prac 2 queries 
+
+-- Questions 1
+
+-- For each department whose average employee salary is more than 30000, retrieve
+-- the department name and the numer of employees working for that department 
+SELECT dname, COUNT(*)
+  FROM department AS d 
+    JOIN employee AS e ON d.dnumber = e.dno 
+  GROUP BY dname
+  HAVING AVG(e.salary) > 30000;
+
+-- Retrueve all employees with a last name that starts with the character 'S'
+SELECT * 
+  FROM employee
+    WHERE lname LIKE 'S%';
+
+-- Find all emplouiyees that work on a project with the word 'Product' in its name 
+SELECT DISTINCT e.fname, e.lname, p.pname 
+  FROM project AS p
+    JOIN works_on AS w ON p.pnumber = w.pno 
+    JOIN employee AS e ON e.ssn = w.essn 
+  WHERE p.pname LIKE '%Product%';
+
+-- QUESTIONS 2
+
+-- Create a view that has the department name, manager name and manafer salary
+-- for every department 
+CREATE VIEW department_info
+AS SELECT d.dname "Department Name", e.fname ||' '|| e.lname "Manager", e.salary "Salary"
+    FROM department AS d 
+      JOIN employee AS e ON d.mgrssn = e.ssn; 
+
+-- Create a view that has the employee name , supervisor name and employee salary 
+-- for each employee who works in the 'Research' department.
+CREATE VIEW research_info
+  AS SELECT e.fname||' '||e.lname "Name", s.fname||' '||s.lname "Supervisor" , e.salary "Salary"
+    FROM employee AS e 
+      JOIN employee AS s ON e.superssn = s.ssn;
+
+-- Create a view that has the project name, controlling department name, and 
+-- number of employees and total hours worjed per week on the poject for each project
+CREATE VIEW project_into 
+  AS SELECT p.pname "Project Name", d.dname "Department", COUNT(DISTINCT w.essn) "Number of Employee", 
+    SUM(w.hours) "Hours Worked"
+    FROM employee AS e 
+      JOIN works_on AS w ON e.ssn = w.essn 
+      JOIN project AS p ON w.pno = p.pnumber 
+      JOIN department AS d ON p.dnum = d.dnumber
+  GROUP BY p.pname, d.dname;
+
+
