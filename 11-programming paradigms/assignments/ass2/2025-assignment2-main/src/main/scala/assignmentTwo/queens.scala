@@ -12,7 +12,7 @@ enum Colour(val letter:Char):
     case Dark extends Colour('d')
     case Cyan extends Colour('c')
     case Purple extends Colour('u')
-    
+
 /** all the different directions a straight line can go in*/
 enum Direction(val dx:Int, val dy:Int):
     case North extends Direction(0, -1)
@@ -165,13 +165,13 @@ extension (map:PossibilityMap) {
     /** Implement this. Returns true if a row in this map definitely breaks a rule. 
      i.e. it has 2 definite queens or is all definite blanks */
     def rowFails(grid:Grid):Boolean = 
-      
+
       // Getting the count of queens in a given row of the board 
       val queens = grid.indices.map(x => grid.row(x).count(q => map(q) == Set(Contents.Queen)))
-      
+
       // returns true if all squares in a row are blank 
       val blanks = grid.indices.map(x => grid.row(x).forall(b => map(b) == Set(Contents.Blank)))
-      
+
       // checking if queens are greater then 1 or all squares are blank
       queens.exists(rows => rows > 1) || blanks.exists(rows => rows)  
 
@@ -179,7 +179,7 @@ extension (map:PossibilityMap) {
 
       val queens = grid.indices.map(x => grid.column(x).count(q => map(q) == Set(Contents.Queen)))
       val blanks = grid.indices.map(x => grid.column(x).forall(b => map(b) == Set(Contents.Blank)))
-      
+
       queens.exists(cols => cols > 1) || blanks.exists(cols => cols) 
 
     /** Implement this. Returns true if a colour in this map definitely breaks a rule. 
@@ -188,7 +188,7 @@ extension (map:PossibilityMap) {
 
       val queens = grid.colours.map(x => grid.squares(x).count(q => map(q) == Set(Contents.Queen)))
       val blanks = grid.colours.map(x => grid.squares(x).forall(b => map(b) == Set(Contents.Blank)))
-      
+
       queens.exists(col => col > 1) || blanks.exists(col => col) 
 
     /* My helper functions */
@@ -211,7 +211,7 @@ extension (map:PossibilityMap) {
           grid.colours.map(c => c -> grid.squares(c).map(getIndex)).toMap  
 
         // Check is there exists a colourgroup that is only in 1 column 
-        colourGroups(grid).exists(colourGroup => colourGroup.flatMap(colourPositions).toSet.size == 1)
+        colourGroups(grid).exists(colourGroup => colourGroup.flatMap(colourPositions).size == 1)
 
       checkForInvalids(_._2) || checkForInvalids(_._1)
 
@@ -252,10 +252,10 @@ extension (map:PossibilityMap) {
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
-     
+
         // Get all the combos of colours for the grid, filtering for 2 or more.
         def colourGroups(grid: Grid): Iterator[Set[Colour]] = grid.colours.subsets.filter(_.size >= 2)
-        
+
         def myExtraRule(map: PossibilityMap, getIndex: Location => Int): PossibilityMap =
 
           // Map: colour  -> grid number for each square depending on rows or columns being passed 
