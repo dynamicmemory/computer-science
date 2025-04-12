@@ -1,7 +1,0 @@
-.bsp/
-.metals/
-.scala-build/
-.vscode/
-*.js
-*.map
-
