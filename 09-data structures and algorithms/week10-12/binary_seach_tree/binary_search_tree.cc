@@ -39,8 +39,28 @@ void Binary_Search_Tree<T>::insert(T k) {
 }
 
 template<class T>
-void Binary_Search_Tree<T>::insert(Node<T>* ) {
+void Binary_Search_Tree<T>::insert(Node<T>* p) {
+
+    Node<T>* parent = 0;
+    Node<T>* q = root;
+
+    while (q != nullptr) {
+        parent = q;
+        if (p->key < q->key)
+            q = q->left;
+        else 
+            q = q->right;
+    }
+
+    p->parent = parent;
+    if (parent == 0)
+        root = p;
+    else if (p->key < parent->key)
+        parent->left = p;
+    else
+        parent->right = p;
 }
+
 
 template<class T>
 void Binary_Search_Tree<T>::inorder_walk() {
@@ -98,11 +118,36 @@ Node<T>* Binary_Search_Tree<T>::minimum(Node<T>* p) {
 }
 
 template<class T>
-void Binary_Search_Tree<T>::transplant(Node<T>* p, Node<T>* p1) {
+void Binary_Search_Tree<T>::transplant(Node<T>* p, Node<T>* q) {
+    
+    if (p->parent == nullptr)
+        root = q;
+    else if (p == (p->parent)->left)
+        (p->parent)->left = q;
+    else
+        (p->parent)-> right = q;
 
+    if (q != nullptr)
+        q->parent = p->parent;
 }
 
 template<class T>
 void Binary_Search_Tree<T>::remove(Node<T>* p) {
-
+    
+    if (p->left == nullptr)
+        transplant(p, p->right);
+    else if (p->right == nullptr)
+        transplant(p, p->left);
+    else {
+        Node<T>* q = minimum(p->right);
+        if (q->parent != p) {
+            transplant(q, q->right);
+            q->right = p->right;
+            (q->right)->parent = q;
+        }
+        transplant(p, q);
+        q->left = p->left;
+        (q->left)->parent = q;
+    }
+    delete p;
 }
