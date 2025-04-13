@@ -225,13 +225,36 @@ SELECT ca.balance, a.atype
   WHERE a.atype = 'Student';
   
 
+SELECT c.name, COUNT(a.atype)
+  FROM customer AS c 
+    JOIN customer_account AS ca ON c.ssn = ca.cssn 
+    JOIN account AS a ON ca.ano = a.anum
+  GROUP BY c.name 
+    HAVING COUNT(a.atype) > 1;
+
+SELECT c.ssn 
+  FROM customer AS c 
+    JOIN customer_account AS ca ON c.ssn = ca.cssn 
+    JOIN account AS a ON ca.ano = a.anum 
+    JOIN bank_branch AS bb ON a.bno = bb.bnum 
+  WHERE bb.b_address Like '%Armidale%' AND a.atype = 'Student' AND c.ssn NOT IN 
+    (SELECT c1.ssn
+      FROM customer AS c1 
+        JOIN  customer_account AS ca1 ON c1.ssn = ca1.cssn 
+    JOIN account AS a1 ON ca1.ano = a1.anum 
+    JOIN bank_branch AS bb1 ON a1.bno = bb1.bnum 
+  WHERE bb1.b_address != '%Armidale%' AND a.atype != 'Student'); 
+
 SELECT c.name 
-  FROM customer 
-
-
-
-
-
+  FROM customer AS c 
+    JOIN customer_loan AS cl ON c.ssn = cl.cssn
+    JOIN loan AS l on cl.lno = l.lnum 
+  WHERE ltype = 'General' AND NOT EXISTS 
+    (SELECT c2.ssn 
+      FROM customer AS c2
+        JOIN customer_loan AS cl2 ON c2.ssn = cl2.cssn
+        JOIN loan AS l2 on cl2.lno = l2.lnum 
+     WHERE ltype = 'General' AND c2.ssn != c.ssn);
 
 
 

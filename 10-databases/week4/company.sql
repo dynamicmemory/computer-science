@@ -137,3 +137,80 @@ CREATE VIEW project_into
   GROUP BY p.pname, d.dname;
 
 
+-- Prac 3 
+
+SELECT e.fname||' '||e.lname "Peasants", s.fname||' '||s.lname "Overlords"
+  FROM employee AS e 
+    LEFT OUTER JOIN employee AS s ON e.superssn = s.ssn;
+
+-- Questions 1
+-- Retriene the first and last name of all employees who do not work on the 
+-- project with name 'ProductZ'
+SELECT e.fname||' '||e.lname "Non Cucked employees"
+  FROM employee AS e 
+  WHERE e.ssn NOT IN 
+    (SELECT ssn 
+      FROM employee 
+        JOIN works_on AS w ON ssn = w.essn
+        JOIN project AS p ON w.pno = p.pnumber 
+      WHERE p.pname Like 'ProductZ');
+
+-- Retrieve the first and last name of all emplouees that work on a project 
+-- that John Smith works on 
+SELECT DISTINCT fname||' '||lname "Johns Bitches"
+  FROM employee 
+    JOIN works_on ON ssn = essn 
+    JOIN project ON pno = pnumber 
+  WHERE pname IN 
+    (SELECT p.pname 
+      FROM project AS p
+        JOIN works_on AS w ON p.pnumber = w.pno 
+        JOIN employee AS e ON w.essn = e.ssn 
+          WHERE e.fname Like 'John' AND e.lname Like 'Smith');
+
+-- List the projhect names of all projects that have at least one employee working 
+-- on them who are supervised by John James 
+
+SELECT p.pname 
+  FROM project AS p 
+    JOIN works_on AS w ON p.pnumber = w.pno 
+    JOIN employee AS e2 ON w.essn = e2.ssn 
+  WHERE e2.ssn = 
+    (SELECT e1.ssn 
+      FROM employee AS e1
+        WHERE e1.superssn = 
+          (SELECT ssn 
+            FROM employee 
+              WHERE fname Like 'John' AND lname Like 'James'));
+
+-- List names of employees that only work on the 'ProductX' project 
+
+SELECT e.fname||' '||e.lname "Elons Bitches"
+  FROM employee AS e 
+    JOIN works_on AS w ON e.ssn = w.essn 
+    JOIN project AS p ON w.pno = p.pnumber 
+  WHERE p.pname = 'ProductX' AND e.ssn NOT IN 
+    (SELECT e1.ssn 
+      FROM employee AS e1
+        JOIN works_on AS w1 ON e1.ssn = w1.essn
+        JOIN project AS p1 ON w1.pno = p1.pnumber
+      WHERE p1.pname != 'ProductX');
+
+-- QUESTION 3 
+
+-- A view that has theproject name, controlling department name , number of employees,
+-- and total hours worked per week on the project for each project with more than one
+-- employee working on it.
+
+CREATE VIEW project_info AS 
+  SELECT p.pname "Project Name", d.dname "Department", COUNT(e.ssn) "Number of Employees", 
+    SUM(w.hours) "Total hours"
+    FROM employee AS e 
+      JOIN works_on AS w ON e.ssn = w.essn 
+      JOIN project AS p ON w.pno = p.pnumber 
+      JOIN department AS d ON p.dnum = d.dnumber
+   GROUP BY p.pname, d.dname 
+     HAVING COUNT(e.ssn) > 1;
+
+
+
