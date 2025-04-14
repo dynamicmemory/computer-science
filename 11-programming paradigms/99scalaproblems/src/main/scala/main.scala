@@ -25,16 +25,16 @@ def p03[A](n: Int, l: List[A]): A =
     case (_, Nil ) => throw new NoSuchElementException
 
 // Find the number of elements of a list 
-def p04[A](ls: List[A]): Int = 
-  ls.size
-  def count(l: List[A], acc: Int): Int = 
-    l match 
-      case _ :: Nil => acc 
-      case _ :: tail => count(tail, acc+1)
-
-  count(ls, 0)
-
-  ls.foldLeft(0) { (c, _) => c + 1}
+// def p04[A](ls: List[A]): Int = 
+//   ls.size
+//   def count(l: List[A], acc: Int): Int = 
+//     l match 
+//       case _ :: Nil => acc 
+//       case _ :: tail => count(tail, acc+1)
+//
+//   count(ls, 0)
+//
+//   ls.foldLeft(0) { (c, _) => c + 1}
 
 // Reverse a list 
 def p05[A](ls: List[A]): List[A] = 
@@ -146,7 +146,7 @@ def p19[A](n: Int, ls: List[A]): List[A] =
   (ls drop n) ++ (ls take n)
 
 // Remove the Kth element from a list 
-def p20[A](n: Int, ls: List[A]): Tuple = 
+def p20[A](n: Int, ls: List[A]): (List[A], A)= 
   // ((ls take n) ++ (ls drop n+1), (ls take n+1).last) // Apparently this is terrible
   ls.splitAt(n) match 
     case (Nil, _) if n < 0 => throw new NoSuchElementException
@@ -158,12 +158,39 @@ def p21[A](element: A, n: Int, ls: List[A]): List[A] =
   ls.splitAt(n) match 
     case (Nil, _) if n < 0 => throw new NoSuchElementException
     case (pre, post) => (pre ::: element :: post)
-    case (pre, Nil) => throw new NoSuchElementException
 
 // Create a list containing all intergers withoin a given range
-def p22[Int](n: Int, k: Int) = 
-  (n to k)
+def p22(n: Int, k: Int): List[Int] = 
+  // (n to k).toList 
+  if (n > k) 
+    Nil
+  else 
+    n :: p22(n+1, k)
+
+// Extract a given number of randomly sleected elements from a list 
+def p23[A](n: Int, ls: List[A]): List[A] = 
   
+  if (n <= 0)
+    Nil 
+  else {
+    val (rest, e) = p20((new util.Random).nextInt(ls.length), ls)
+    e :: p23(n-1, rest)
+
+  }
+
+// Lotto: draw N different random numbers from the set M 
+// def p24[A](n: Int, limit: Int): List[A] = 
+//   val number = (0 to limit).toList
+//
+//   p23(n, List.range(1, limit + 1))
+
+// Generate a random permutation of the elements of a list.
+def p25[A](ls: List[A]): List[A] = 
+  p23(ls.length, ls)
+
+// Generate the combinations of K distinct objects chosen from the N elements of a list 
+def p26[A](n: Int, ls: List[A]): List[A] = 
+  ???  
 
 @main 
 def run(): Unit = {
@@ -205,10 +232,12 @@ def run(): Unit = {
   // println(p17(4, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
   // println(p18(3, 7, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
   // println(p19(3, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
-  println(p20(3, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
-  println(p21("new", 3, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
-  println(p22(4, 9))
-  
+  // println(p20(3, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
+  // println(p21("new", 3, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
+  // println(p22(4, 9))
+  // println(p23(3, List('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k')))
+  // println(p24(6, 49))
+  println(p25(List('a','b','c','d','e','f')))
   
 }
 
