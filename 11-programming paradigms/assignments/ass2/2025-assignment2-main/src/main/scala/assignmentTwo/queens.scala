@@ -225,8 +225,6 @@ extension (map:PossibilityMap) {
 
 
     def makeAstep(grid: Grid): PossibilityMap =
-      // val colourPositionsRow = grid.colours.map(c => c -> grid.squares(c).map(_._2)).toMap
-      // val colourPositionsCol = grid.colours.map(c => c -> grid.squares(c).map(_._1)).toMap
 
       val snapShot = map
 
@@ -252,9 +250,6 @@ extension (map:PossibilityMap) {
       }
       // Check if anything was solved, use the extraRule if not
       if (updated == snapShot) {
-
-        // Get all the combos of colours for the grid, filtering for 2 or more.
-        def colourGroups(grid: Grid): Iterator[Set[Colour]] = grid.colours.subsets.filter(_.size >= 2)
 
         def myExtraRule(map: PossibilityMap, getIndex: Location => Int): PossibilityMap =
 

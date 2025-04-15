@@ -34,4 +34,48 @@ all_employee_projects := employee_projects[ssn, pno]
 works_on_js_projects := all_employee_projects DIVIDEDBY john_smith_projects
 final := (employee * works_on_js_projects)[ssn, fname, lname]
 
+Example 5 
+Return a list of all employees and the name of a department if they happen to 
+manage a department 
 
+employee_and_manager := employee LEFT OUTER JOIN ssn = mgr_ssn department 
+final := employee_and_manager[fname, lname, ssn]
+
+Example 6 
+Return the name and address of all employees who work for the research department 
+
+all_employees := employee JOIN dno = dnum department
+research_employees := all_employees WHERE dname = 'reseach'
+final := research_employees[fname, address]
+
+Example 7
+For every project located in 'Stafford', list the project number, the controlling
+department number and hte department managers last name, birth date and address 
+
+stafford_projects := project WHERE plocation = 'Stafford'[pnum, dno]
+project_department := stafford_projects JOIN dno = dnum department[dnum, mgr_ssn]
+department_employees := project_department JOIN mgr_ssn = ssn employees[pnum, lname, birth_date, address]
+
+Example 8 
+Find the names of employees who work on all the projects controlled by department 5 
+
+projects_and_departments := projects JOIN pnumber = pno department
+department_5_projects := projects_and_departments WHERE dnum = 5
+all_employees := employee JOIN ssn = essn projects_and_departments
+// This is wrong, use divided by 
+
+Example 9 
+Make a list of project numbers for projects that involve an employee whose last 
+name is 'Smith', either as a worker or as a manager of the department that controls 
+the project 
+
+employee_named_smith := (employee WHERE lname = 'Smith')[ssn, dno]
+smiths_department := employee_named_smith JOIN dno = dnum works_on 
+smiths_projects := smiths_department JOIN pno = pnumber project 
+result := smiths_projects[pnumber]
+
+Example 10 
+List the names of all employees with two or more dependents
+
+count_dependents := (COUNT, dependent_names (dependent) GROUP BY essn) >= 2 
+final := employee 

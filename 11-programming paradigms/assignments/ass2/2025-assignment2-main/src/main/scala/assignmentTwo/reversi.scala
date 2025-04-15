@@ -98,7 +98,7 @@ extension (board:Board) {
       
   /** The number of pieces the given player has. You need to implement this */
   def piecesFor(p:Player):Int = 
-    board.count((x, y) => y == p)   
+    board.count((loc, player) => player == p)   
 
   /**
   * If player p placed a piece in location l, what are the locations it would
@@ -152,7 +152,7 @@ extension (board:Board) {
       y <- 0 to 7
       if (isValidMove((x,y), p))
     }
-    yield(x,y)                          // This might be broken, cant test yet
+    yield(x,y)                         
 
   /** 
   * Returns a board where player p has placed a piece in location l. You need to implement this. 
@@ -274,11 +274,9 @@ def newGame:Seq[GameState] = Seq(GameState.newGame)
 
 /** Called by the UI to make your AI play the game. You need to implement this. */
 def chooseMove(state:Seq[GameState]):Location = 
-  // TODO - Fix this, handle the error don't throw it.
-  // TODO - calling the same stuff on state over and over, simlify 
-  // The ai cant go first in our version, so there is always a last turn, so 
-  // this might not be needed
-  val currentPlayer = state.last.turn.getOrElse(throw new IllegalStateException) 
+  // TODO - calling the same stuff on state over and over, simplify 
+
+  val currentPlayer = state.last.turn.last 
 
   val allMoves = state.last.board.allValidMoves(currentPlayer)
 
