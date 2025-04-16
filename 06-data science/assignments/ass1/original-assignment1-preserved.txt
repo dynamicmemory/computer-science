@@ -10,10 +10,34 @@
   },
   {
    "cell_type": "markdown",
-   "id": "99f45904-d26e-448a-a263-a2767a889c6c",
+   "id": "5c02160e-ba8b-485b-a4bb-cf547ef344db",
    "metadata": {},
    "source": [
+    "Project name: COSC102 - Assignment 1 <br>\n",
+    "Author: - <br>\n",
+    "Email: - <br>\n",
+    "Date: 03/07/2024"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "99f45904-d26e-448a-a263-a2767a889c6c",
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
+   "source": [
     "## Question 1 "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ba35dcbe-9045-48ac-ba2d-ff72124a024a",
+   "metadata": {},
+   "source": [
+    "In this notebook we will be investigating the population relationship between rabbits and foxes. Some basic parameters are:\n",
+    "- The only food for foxes is rabbits\n",
+    "- There is unlimited growth for both populations\n",
+    "- This is a closed system - No foxes or rabbits are added or subtract by outside influences"
    ]
   },
   {
@@ -31,7 +55,9 @@
   {
    "cell_type": "markdown",
    "id": "ae2cfb10-031d-4523-b01b-db7683581374",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 1"
    ]
@@ -51,7 +77,9 @@
   {
    "cell_type": "markdown",
    "id": "4cb9954a-941c-488d-a4d3-ce527d7efa17",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 2"
    ]
@@ -74,7 +102,9 @@
   {
    "cell_type": "markdown",
    "id": "680bdcc2-7f6d-428d-9423-5710e5b4f067",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 3"
    ]
@@ -97,7 +127,9 @@
   {
    "cell_type": "markdown",
    "id": "93388dc8-cce0-4498-a8d4-96e8dd5462c5",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 4"
    ]
@@ -142,7 +174,9 @@
   {
    "cell_type": "markdown",
    "id": "5bb34009-b6e6-4372-83c7-0302d89ff6c6",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 5"
    ]
@@ -199,9 +233,26 @@
   {
    "cell_type": "markdown",
    "id": "b4810753-a0b9-43c6-982b-3367a2a56f3f",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Analysis of the chart"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "34bd10d6-b75d-4bdf-a046-d61a304cfb28",
+   "metadata": {},
+   "source": [
+    "So from our above chart, there are a few things that we can infer about the relationship between the populations of <br>\n",
+    "the two animals in our experiment:\n",
+    "1. It seems that the fox population tends to lag the rabbit population. <br>\n",
+    "This makes sense as with lower fox numbers the rabbits are able to reproduce<br>\n",
+    "much quicker then when there is a larger number of foxes hunting them.\n",
+    "2. As this was an isolated test with no outside elements effecting the results, <br>\n",
+    "our data potentially suggests to no control in the form of conservation, may lead <br>\n",
+    "to a total population wipe out of both animal species."
    ]
   },
   {
@@ -210,6 +261,22 @@
    "metadata": {},
    "source": [
     "## Question 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b04b0295-46b3-4e20-a8fe-2392dafa8d89",
+   "metadata": {},
+   "source": [
+    "In this question we are looking at some historical data of tempreatures and rainfall to try gain insights into the global issue of climate change. <br>\n",
+    "In the following sections we will be:\n",
+    "- Calculating some basic statistics from out data\n",
+    "- plotting our data  over time to real any patterns\n",
+    "- Calculate moving averages of the data\n",
+    "- Check the correlation between rainfall and tempreature and plotting our results\n",
+    "- Locating in our data significant points such as their highest and lowest points\n",
+    "\n",
+    "Lets get started"
    ]
   },
   {
@@ -227,7 +294,9 @@
   {
    "cell_type": "markdown",
    "id": "b64eff59-c7c2-48c4-b858-6ec9c91260ba",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 1. Data Cleaning"
    ]
@@ -364,6 +433,17 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "93fd0da7-5906-42c8-8cd0-b2945ee6a043",
+   "metadata": {},
+   "source": [
+    "As we see from our info we are working with a data set with three column: Date, Tempreature and precipitation. <br> \n",
+    "It looks like we have all values for date and tempreature but we are clealy missing some Precipitation data. <br>\n",
+    "We have a few options on what we can replace it with. For this type of dataset I think it is approitate to replace <br>\n",
+    "then values with the mean of the series."
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 188,
    "id": "22b2d46b-ae4e-4ddf-a2a6-d164d7808108",
@@ -400,7 +480,9 @@
   {
    "cell_type": "markdown",
    "id": "23182819-94d8-45a5-86d4-2517f7ea3338",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 2. Descriptive Statistics"
    ]
@@ -408,7 +490,9 @@
   {
    "cell_type": "markdown",
    "id": "924819d5-733d-452a-a96b-cb1030e3692f",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Range Function"
    ]
@@ -435,7 +519,9 @@
   {
    "cell_type": "markdown",
    "id": "e5e20a4b-4ba6-4f12-b4bc-5c4f1472b670",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Mean Function"
    ]
@@ -471,7 +557,9 @@
   {
    "cell_type": "markdown",
    "id": "2027a37b-4186-46cb-9b50-c63c9a4ca275",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Median Function"
    ]
@@ -505,7 +593,9 @@
   {
    "cell_type": "markdown",
    "id": "b4dae342-5f96-41d8-912b-224f29b46c7b",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Standard Deviation Function"
    ]
@@ -547,7 +637,9 @@
   {
    "cell_type": "markdown",
    "id": "a15159ba-f584-421d-ae88-e046171abe0f",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Total Statistics Function"
    ]
@@ -714,7 +806,9 @@
   {
    "cell_type": "markdown",
    "id": "ecf83862-f5ce-494c-9d35-6c91bd9e2e47",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task 3. Time Series Analysis"
    ]
@@ -728,7 +822,19 @@
    "source": [
     "# Create a function that will plot out all the values in our dataframe onto individual charts\n",
     "def createAChart(x, y, title):\n",
-    "\n",
+    "    \"\"\"\n",
+    "    Creates a chart of all series passed to it. \n",
+    "    \n",
+    "    Takes an input, x which is a pandas series for the x-axis and another input, y which is a list\n",
+    "    of tuples for the y-axis. It then plots each y-axis values one at a time until there are no \n",
+    "    more left, at which point it applies all the style changes, appends a legend and presents the\n",
+    "    chart.\n",
+    "    params: \n",
+    "    - Pandas series: x - the x coordinates for a plot\n",
+    "    - List: y - a tuple of all the why values with the desired colour and label for the series\n",
+    "    - String : title - the title for the created chart.\n",
+    "    Returns: None\n",
+    "    \"\"\"\n",
     "    \n",
     "    # Create the figure\n",
     "    fig, ax=plt.subplots(figsize=(15,6))\n",
@@ -751,7 +857,9 @@
   {
    "cell_type": "markdown",
    "id": "a2010de1-544f-4b1f-9340-b93e943c9361",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Temperature over time & Moving average"
    ]
@@ -787,7 +895,9 @@
   {
    "cell_type": "markdown",
    "id": "8c1b4059-e61d-438a-b818-e9aea7fd2530",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Precipitation over Time"
    ]
@@ -822,9 +932,21 @@
   {
    "cell_type": "markdown",
    "id": "ab097d17-7715-4b66-8836-db7482d35cf6",
-   "metadata": {},
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "#### Comparison of moving Averages"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9837387b-21c7-441f-8e4e-d6858a4cf606",
+   "metadata": {},
+   "source": [
+    "Before doing a correlation analysis, I thought it might be a good idea to see if we can visualize any correlation in the data. Are there any matching trends,<br> \n",
+    "or are the two series perhaps inverse to one another or always in-sync. Below we compare both of the series moving averages that we calculated above to see <br> \n",
+    "if we can spot any similarities."
    ]
   },
   {
@@ -868,10 +990,40 @@
   },
   {
    "cell_type": "markdown",
-   "id": "a264facd-6365-42ab-b528-1c258f28ae15",
+   "id": "c68349d1-bafd-472a-8cf3-e8c6b14aac77",
    "metadata": {},
    "source": [
+    "In general it would seem that there is very little correlation between the two series. Towards the middle of the chart we can see <br>\n",
+    "a small amount of inverse correlation with the temperature dropping to its lowest average and the precipitation rising to one of its peaks. <br>\n",
+    "But this seems to be the only itme the two series act in such an obvious inverse manner like this. Towards the end of the chart we do see that <br>\n",
+    "both data series start to rend downwards in what appears to be somewhat of a lock step manner, but when compared to the rest of the dataset, this <br>\n",
+    "one moment in time is not enough to make any meaningful predictictions or assumptions on whether or not there is a connection from one dataset to <br>\n",
+    "the other. Lets now use pandas .corr function to see if there is any correlation between the original sets of climate data."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a264facd-6365-42ab-b528-1c258f28ae15",
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
+   "source": [
     "### Task 4. Correlation analysis"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0b97f906-5693-41e3-bc19-ba92859517c9",
+   "metadata": {},
+   "source": [
+    "To calculate the correlation between the temperature and precipitation we need to:\n",
+    "1. Get the averages of our two series\n",
+    "2. Calculate the difference between each of the values of our series and their average's\n",
+    "3. Multiply those two differences together.\n",
+    "4. Add the sum of every product from step 3 together\n",
+    "5. Divide the number produced in step 4 by the size of the whole series to get the covariance\n",
+    "6. Now divide the covariance by the product of both standard deviations of our two series\n",
+    "7. You now have the correlation coefficient, (time to drop out and go to wall street!)"
    ]
   },
   {
@@ -927,6 +1079,16 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "2d8bb655-378b-46f4-81e9-9844585475d7",
+   "metadata": {},
+   "source": [
+    "This correlation metric shows us that there is practically no correlation at all between our data series as <br>\n",
+    "a score of 1 would be considered a perfect correlation and -1 would be a negative correlation, and 0 indicates <br>\n",
+    "no correlation at all. Our data set is very close to zero, indicating practically no correlation exists."
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 229,
    "id": "4e02f237-fc3e-4358-bb76-51c4d324bff7",
@@ -966,8 +1128,20 @@
   },
   {
    "cell_type": "markdown",
-   "id": "94ee7a0a-aa38-44e1-802d-838bc48caaa4",
+   "id": "a4f9812a-a78b-44f9-82bc-a28685367a0f",
    "metadata": {},
+   "source": [
+    "Finally looking at our scatter plot of all of our data points combined, we see what has already been<br>\n",
+    "confirmed above, No correlation, just a cloud of data sitting in the center with a slight horizontal<br>\n",
+    "line sitting right where our regression line is sitting."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "94ee7a0a-aa38-44e1-802d-838bc48caaa4",
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
    "source": [
     "### Task5. Extreme Events Analysis"
    ]
@@ -1062,6 +1236,18 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "420f45a1-4ff8-4158-8800-43ce3a10868c",
+   "metadata": {},
+   "source": [
+    "Overall this was an interesting experiment we performed on two years of temperature and precipitation data. We learnt that <br>\n",
+    "there does not seem to be much correlation between the day to day temperatures and rainfall (according to the dataset we used) <br>\n",
+    "Perhaps with a bigger dataset with different weather variables that is collected over a much longer timeframe (100s of years), we  <br>\n",
+    "may perhaps be able to see a much stronger correlation between variables or a more cyclic pattern of the weather over time, or perhaps <br>\n",
+    "not, our experiements in this notebook suggest otherwise for now."
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": null,
    "id": "8fe14c0e-9606-4699-9350-e883a6e63f9a",
@@ -1086,7 +1272,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.12.2"
+   "version": "3.11.7"
   }
  },
  "nbformat": 4,
