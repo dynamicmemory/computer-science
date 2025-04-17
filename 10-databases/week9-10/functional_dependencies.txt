@@ -1,0 +1,58 @@
+Example 1 
+
+FD1: ssn->ename
+FD2: pnumber->{pname, plocation}
+FD3: {ssn, pnumber}->hours
+
+ssn+            = {ssn, ename}
+pnumber+        = {pnumber, pname, plocation}
+{ssn, pnumber}+ = {ssn, pnumber, ename, pname, plocation, hours}
+
+
+Example 2 
+
+F = {A->C, AC->D, E->AD, E->H}
+G = {A->CD, E->AH}
+
+F+
+A+ = {A, C, D}
+{A, C}+ = {A, C, D}
+E+ = {E, A, D, H, C}
+E+ = {E, A, D, H, C}
+
+F+
+A+ = {A, C, D}
+{A, C}+ = {A, C, D}
+E+ = {E, A, H, C, D}
+
+G+
+A+ = {A, C, D}
+E+ = {E, A, H, C, D}
+
+G+
+A+ = {A, C, D}
+E+ = {E, A, D, H, C}
+
+
+Example 3 
+
+E = {B->A, D->A, AB->D}
+AB->D
+
+{B->D, D->A}
+
+
+Example 4 
+
+AB->CD, BC->D
+
+AB->C, AB->D, BC->D
+
+AB+ = {A, B, D} not redundant
+AB+ = {A, B, C, D... this is redundant 
+BC+ = {B, C} not redundant 
+
+B+ ... 'A' not redundant 
+A+ ... 'B' not redundant 
+
+AB->C, BC->D is our minimal cover

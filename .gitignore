@@ -17,9 +17,9 @@ textbooks/
 
 # Remove these once i fix the repo
 06-data science/topics
-06-data science/assignments/ass1*.ipynb
-06-data science/assignments/ass2*.ipynb
-06-data science/assignments/ass3*.ipynb
+06-data science/assignments/ass1/*.ipynb
+06-data science/assignments/ass2/*.ipynb
+06-data science/assignments/ass3/*.ipynb
 07-oop in java/lectures
 
 
