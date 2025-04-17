@@ -14,8 +14,10 @@ notes/
 .Rproj.user
 .RData
 .Rhistory
+
 # Remove these once i fix the repo
 06-data science/topics
+06-data science/assignments/*.ipynb
 07-oop in java/lectures
 
 

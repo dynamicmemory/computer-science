@@ -10,4 +10,7 @@ int main(int argc, char* argv[]) {
         btree.insert(i);
 
     btree.inorder_walk();
+    btree.preorder_walk();
+    btree.postorder_walk();
+    btree.inorder_leaf_height();
 }

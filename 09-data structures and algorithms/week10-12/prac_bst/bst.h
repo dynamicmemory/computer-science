@@ -33,6 +33,8 @@ public:
     void preorder_walk(Node<T>*);
     void postorder_walk();
     void postorder_walk(Node<T>*);
+    void inorder_leaf_height();
+    void inorder_leaf_height(Node<T>*, int);
 private:
 	Node<T>* root;
 };
@@ -177,6 +179,11 @@ void Binary_Search_Tree<T>::preorder_walk() {
 template<class T>
 void Binary_Search_Tree<T>::preorder_walk(Node<T>* p) {
 
+    if (p != nullptr) {
+        std::cout << p->key << " ";
+        preorder_walk(p->left);
+        preorder_walk(p->right);
+    }
 }
 
 template<class T>
@@ -187,4 +194,25 @@ void Binary_Search_Tree<T>::postorder_walk() {
 template<class T>
 void Binary_Search_Tree<T>::postorder_walk(Node<T>* p) {
 
+    if (p != nullptr) {
+        postorder_walk(p->left);
+        postorder_walk(p->right);
+        std::cout << p->key << " ";
+    }
 }
+
+template<class T>
+void Binary_Search_Tree<T>::inorder_leaf_height() {
+    inorder_leaf_height(root, 0), std::cout << std::endl;
+}
+
+template<class T>
+void Binary_Search_Tree<T>::inorder_leaf_height(Node<T>* p, int n) {
+    n++;
+    if (p != nullptr) {
+        inorder_leaf_height(p->left, n);
+        if (p->left == nullptr && p->right == nullptr)
+           std::cout << "Key value: " << p->key << ", Tree height: " << n << "\n";
+        inorder_leaf_height(p->right, n);
+    }
+}   
