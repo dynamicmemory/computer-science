@@ -77,14 +77,14 @@ object SudokuSensei {
     * Don't forget, Position is just an alias for a tuple (Int, Int)
     */
   def row(pos:Position):Seq[Position] = {
-    ???
+    (0 to 8).map(n => (n, pos._2)).toSeq
   }
 
   /**
     * Now let's make a function that will return all the Positions in the same column
     */
   def column(pos:Position):Seq[Position] = {
-    ???
+    (0 to 8).map(n => (pos._1, n)).toSeq
   }
 
   /**
@@ -95,14 +95,19 @@ object SudokuSensei {
     * So let's define that as a function. (No higher order functions required here)
     */
   def whichThree(n:Int):Seq[Int] = {
-    ???
+    n match 
+    case (0 to 2) => (0 to 2).toSeq
+    case (3 to 5) => (3 to 5).toSeq
+    case (6 to 8) => (6 to 8).toSeq
+    
   }
 
   /**
     * And then let's use that function to return all the positions in the same quadrant.
     */
   def quadrant(pos:Position):Seq[Position] = {
-    ???
+    whichThree(pos._1).zip(whichThree(pos._2))
+
   }
 
   /**
@@ -127,7 +132,8 @@ object SudokuSensei {
     * And you might want to use the exists method -- a higher order function on sequences.
     */
   def numberPresentIn(grid:Grid, n:Int, positions:Seq[Position]):Boolean = {
-    ???
+    grid.foreach((square, number) => {
+      if (
   }
 
   /**

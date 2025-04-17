@@ -219,7 +219,10 @@ object Roman {
   // @tailrec
   def nextNumeral(n:Int, numerals:List[(String, Int)] = allNumerals):(String, Int) = {
     // either the head pair is the one we want, or call ourselves recursively for the tail
-    ???
+    numerals match 
+      case head :: tail if head._2 <= n => head
+      case head :: tail if head._2 >= n => nextNumeral(n, tail)
+      case Nil => ("", 0)
   }
 
   /**
@@ -231,7 +234,11 @@ object Roman {
     // We keep the string we've built so far in s
     //@tailrec
     def intRom(n:Int, s:String = ""):String = {
-      ???
+      if (n <= 0) 
+        s 
+      else
+        val (str, num) = nextNumeral(n)
+        intRom(n - num, s + str)
     }
 
     intRom(n)
@@ -271,7 +278,11 @@ object Puzzle {
     */
   //@tailrec
   def nextLine(source:List[Int], dest:List[Int] = Nil):List[Int] = {
-    ???
+    source match 
+    case Nil => dest.reverse 
+    case head :: _ => 
+      val (same, rest) = source.span(_ == head)
+      nextLine(rest, head :: same.length :: dest)
   }
 
   /**
@@ -281,7 +292,10 @@ object Puzzle {
 
     //@tailrec
     def intPuz(n:Int, line:List[Int] = List(1)):List[Int] = {
-      ???
+      if (n <= 0)
+        line 
+      else 
+        intPuz(n-1, nextLine(line))
     }
 
     intPuz(n)
