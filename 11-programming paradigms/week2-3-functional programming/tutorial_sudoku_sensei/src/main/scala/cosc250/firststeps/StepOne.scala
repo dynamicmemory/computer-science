@@ -14,7 +14,8 @@ object StepOne {
     *
     * Start off by doing this iteratively. And then we'll discover how much shorter it is functionally.
     */
-  def doubleArray(arr:Array[Int]):Array[Int] = ???
+  def doubleArray(arr:Array[Int]):Array[Int] = 
+    arr.map(num => num * 2)
 
   /**
     * Multiply every element in an array by its position in the array
@@ -22,14 +23,15 @@ object StepOne {
     *
     * You might need zipWithIndex here...
     */
-  def timesPosition(arr:Array[Int]):Array[Int] = ???
-
+  def timesPosition(arr:Array[Int]):Array[Int] = 
+    arr.zipWithIndex.map((num, idx) => num*idx)
 
   /**
     * Ok, we did that for arrays. Now, what if we want to do it for lists?
     * Hint: if you're working imperatively and mutably, you can start with an Array and then go .toList on it at the end
     */
-  def doubleList(arr:List[Int]):List[Int] = ???
+  def doubleList(arr:List[Int]):List[Int] =
+    arr.map(num => num * 2).toList
 
 
   /**
@@ -37,7 +39,16 @@ object StepOne {
     * words have letters in commong. eg, for "frogs" and "eggs", we would return
     * List((3,1), (3,2), (4,3)
     */
-  def matchingLetters(wordA:String, wordB:String):List[(Int, Int)] = ???
+  def matchingLetters(wordA:String, wordB:String):List[(Int, Int)] = 
+    val one = wordA.zipWithIndex
+    val two = wordB.zipWithIndex
+
+    {
+      for 
+        a <- one
+        b <- two if (a._1 == b._1)
+      yield (a._2, b._2)
+    }.toList
 
   /**
     * Ok, the Roman Numerals one is harder to do this way, but I'll leave it here for anyone who's keen. You can skip

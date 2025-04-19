@@ -1,4 +1,5 @@
 #include<list>
+#include <set>
 #include<algorithm>
 #include<iostream>
 #include<string>
@@ -24,8 +25,8 @@ int menu()
 
 int main()
 {
-	list<string> flight_list;
-	list<string>::iterator i1, i2;
+	set<string> boat_list;
+	set<string>::iterator i1, i2;
 	string name;
 
 	while (true) 
@@ -37,7 +38,7 @@ int main()
 					ifstream input("ticket_reservations.dat");
 					while (input >> name) 
 					{					
-						flight_list.push_back(name);
+						boat_list.insert(name);
 					}
 					input.close();
 					break;
@@ -47,7 +48,7 @@ int main()
 				{
 					cout << "name of passenger:" << endl; 
 					cin >> name;
-					flight_list.push_back(name);
+					boat_list.insert(name);
 					break;
 				}
 
@@ -55,7 +56,7 @@ int main()
 				{
 					cout << "name of passenger:" << endl;
 					cin >> name;
-					flight_list.remove(name);
+					boat_list.erase(name);
 					break;
 				}
 
@@ -63,8 +64,8 @@ int main()
 				{
 					cout << "name of passenger:" << endl;
 					cin >> name;
-					i1 = flight_list.begin();
-					i2 = flight_list.end();
+					i1 = boat_list.begin();
+					i2 = boat_list.end();
 					if (find(i1, i2, name) != i2)
 						cout << "this passenger has a ticket reservation" << endl;
 					else
@@ -74,9 +75,9 @@ int main()
 
 			case 5:	
 				{
-					flight_list.sort();
-					i1 = flight_list.begin();
-					i2 = flight_list.end();
+					// boat_list.sort();
+					i1 = boat_list.begin();
+					i2 = boat_list.end();
 					for ( ; i1 != i2; ++i1) {
 						cout << *i1 << endl;
 					}
@@ -85,9 +86,9 @@ int main()
 
 			case 6: 
 				{
-					flight_list.sort();
-					i1 = flight_list.begin();
-					i2 = flight_list.end();
+					// boat_list.sort();
+					i1 = boat_list.begin();
+					i2 = boat_list.end();
 					ofstream output("ticket_reservations.dat");
 					for ( ; i1 != i2; ++i1) {
 						output << *i1 << " ";

@@ -95,19 +95,22 @@ object SudokuSensei {
     * So let's define that as a function. (No higher order functions required here)
     */
   def whichThree(n:Int):Seq[Int] = {
-    n match 
-    case (0 to 2) => (0 to 2).toSeq
-    case (3 to 5) => (3 to 5).toSeq
-    case (6 to 8) => (6 to 8).toSeq
-    
+    if (n <= 2)
+      0 to 2 
+    else if (n <= 5)
+      3 to 5 
+    else 
+      6 to 8 
   }
 
   /**
     * And then let's use that function to return all the positions in the same quadrant.
     */
   def quadrant(pos:Position):Seq[Position] = {
-    whichThree(pos._1).zip(whichThree(pos._2))
-
+    for {
+      x <- whichThree(pos._1)
+      y <- whichThree(pos._2)
+    } yield (x, y)
   }
 
   /**
@@ -132,8 +135,9 @@ object SudokuSensei {
     * And you might want to use the exists method -- a higher order function on sequences.
     */
   def numberPresentIn(grid:Grid, n:Int, positions:Seq[Position]):Boolean = {
-    grid.foreach((square, number) => {
-      if (
+    positions.exists(pos =>
+        grid.exists { case (p, value) => p == pos && value == n }
+        )
   }
 
   /**
@@ -149,7 +153,9 @@ object SudokuSensei {
     * positionFunctions.exists(...
     */
   def possibilitiesFor(pos:Position, grid:Grid):Seq[Int] = {
-    ???
+    (1 to 9).filterNot { n => 
+      positionFunctions.exists(f => numberPresentIn(grid, n, f(pos)))
+    }
   }
 
   /**
@@ -158,7 +164,14 @@ object SudokuSensei {
     * what number goes there.
     */
   def nextMoves(grid:Grid):Seq[(Position, Int)] = {
-    ???
+    for {
+      x <- (0 to 8)
+      y <- (0 to 8)
+      pos = (x, y)
+      if !grid.contains(pos)
+      nums = possibilitiesFor(pos, grid)
+      if (nums.size == 1)
+    } yield ((x, y), nums.head)
   }
 
 }
